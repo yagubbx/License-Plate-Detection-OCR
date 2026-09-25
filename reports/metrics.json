@@ -1,0 +1,46 @@
+{
+  "weights_sha256": "e3b81d772d8aa7d32895f01af287874ce2de3df3f823cc9984ff02571ae05329",
+  "manifest_sha256": "6ee0934b4a7ebfe278c23d68577bf1ff5e83867887b2cab350362c2bd6cb2478",
+  "confidence": 0.25,
+  "padding": 0.08,
+  "iou_threshold": 0.5,
+  "image_size": 416,
+  "metrics": {
+    "easyocr": {
+      "images": 30,
+      "ground_truth_plates": 30,
+      "true_positives": 30,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "mean_iou_all_gt": 0.8457460583385973,
+      "precision_at_50": 1.0,
+      "recall_at_50": 1.0,
+      "f1_at_50": 1.0,
+      "end_to_end_exact_match": 0.7666666666666667,
+      "exact_plates": 23,
+      "end_to_end_cer": 0.07142857142857142,
+      "ocr_exact_match_on_matched_detections": 0.7666666666666667,
+      "ocr_cer_on_matched_detections": 0.07142857142857142,
+      "all_plates_image_accuracy": 0.7666666666666667,
+      "ocr_seconds": 19.70109049999155
+    },
+    "tesseract": {
+      "images": 30,
+      "ground_truth_plates": 30,
+      "true_positives": 30,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "mean_iou_all_gt": 0.8457460583385973,
+      "precision_at_50": 1.0,
+      "recall_at_50": 1.0,
+      "f1_at_50": 1.0,
+      "end_to_end_exact_match": 0.03333333333333333,
+      "exact_plates": 1,
+      "end_to_end_cer": 0.8476190476190476,
+      "ocr_exact_match_on_matched_detections": 0.03333333333333333,
+      "ocr_cer_on_matched_detections": 0.8476190476190476,
+      "all_plates_image_accuracy": 0.03333333333333333,
+      "ocr_seconds": 7.446286600083113
+    }
+  }
+}
