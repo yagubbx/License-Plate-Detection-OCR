@@ -1,288 +1,421 @@
 {
-  "source": "https://github.com/openalpr/benchmarks",
-  "commit": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-  "split_rule": "sha256(plate-split-42:source path); first 30 test, next 10 val, remainder train",
+  "description": "25-image held-out evaluation set: 18 supplied Azerbaijani images and 7 retained Brazilian images.",
+  "annotation_notes": "The 18 supplied images were visually annotated independently of detector output. The 7 retained images preserve source labels. Foreground plates and the legible background plate in car_2 are labeled; tiny unreadable background plates are outside the OCR transcription scope. Unmatched predictions still count as false positives.",
+  "model_note": "The detector was previously fine-tuned on 74 different Brazilian images. None of these 25 test images was used for that fine-tuning. No tuning was performed on the supplied images.",
   "images": [
     {
-      "id": "NYZ0897",
-      "image": "data/images/NYZ0897.jpg",
+      "id": "car_1",
+      "image": "data/images/car_1.png",
+      "source_filename": "pictures/001 efirdi).jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            527,
-            383,
-            692,
-            436
+            425,
+            780,
+            571,
+            828
           ],
-          "text": "NYZ0897",
-          "source_box": [
-            527,
-            383,
-            692,
-            436
-          ]
+          "text": "01MH001"
         }
       ],
-      "source": "endtoend/br/NYZ0897.jpg",
-      "sha256": "c4977eda0bb0d218a5d2787fdcc6f71a1df74089e53bcaa5c122f428551067f8"
+      "width": 736,
+      "height": 981,
+      "sha256": "79230883d9ef9a5d32664fe60e228ad3653d6df2e672ffdc15d081c82e890422"
     },
     {
-      "id": "NZM5430",
-      "image": "data/images/NZM5430.jpg",
+      "id": "car_2",
+      "image": "data/images/car_2.png",
+      "source_filename": "pictures/10 NM 011.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            446,
-            680,
-            812,
-            798
+            237,
+            860,
+            433,
+            907
           ],
-          "text": "NZM5430",
-          "source_box": [
-            446,
-            680,
-            812,
-            798
-          ]
+          "text": "10NM011"
+        },
+        {
+          "box": [
+            54,
+            554,
+            111,
+            571
+          ],
+          "text": "20DE200"
         }
       ],
-      "source": "endtoend/br/NZM5430.jpg",
-      "sha256": "c2707e11600615dce33562d6201fce8f906482e28a1af06433eb47c2ca80f342"
+      "width": 736,
+      "height": 1081,
+      "sha256": "c94ddede18fca338286a7a4033ecb3781f651964c4578efc5259ef1337fb1add"
     },
     {
-      "id": "OKK7448",
-      "image": "data/images/OKK7448.jpg",
+      "id": "car_3",
+      "image": "data/images/car_3.png",
+      "source_filename": "pictures/60 CA 006.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            535,
-            811,
-            789,
-            893
+            155,
+            652,
+            287,
+            691
           ],
-          "text": "OKK7448",
-          "source_box": [
-            535,
-            811,
-            789,
-            893
-          ]
+          "text": "60CA006"
         }
       ],
-      "source": "endtoend/br/OKK7448.jpg",
-      "sha256": "499d097998997cf126d01e42dd643d0a14ee13a55c36fa954d2336d5e3caa038"
+      "width": 736,
+      "height": 920,
+      "sha256": "ff66e834c5f6b6ef9fb9c9b5eced053d219feeae8de54303c5f8d13cf88eb303"
     },
     {
-      "id": "JRV1942",
-      "image": "data/images/JRV1942.jpg",
+      "id": "car_4",
+      "image": "data/images/car_4.png",
+      "source_filename": "pictures/90 DC 004.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            561,
-            621,
-            824,
-            706
+            463,
+            717,
+            566,
+            758
           ],
-          "text": "JRV1942",
-          "source_box": [
-            561,
-            621,
-            824,
-            706
-          ]
+          "text": "90DC004"
         }
       ],
-      "source": "endtoend/br/JRV1942.jpg",
-      "sha256": "5fa5526a76f064ae36a65407ea85c9e13bba0d8801d395560922787fd9e717c6"
+      "width": 736,
+      "height": 969,
+      "sha256": "8001232222aa9fc4f74478f62f9ea96ec7302873da31ddd1f77c6363407cf4fb"
     },
     {
-      "id": "PJH0957",
-      "image": "data/images/PJH0957.jpg",
+      "id": "car_5",
+      "image": "data/images/car_5.png",
+      "source_filename": "pictures/911.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            483,
-            601,
-            715,
-            676
+            532,
+            563,
+            641,
+            615
           ],
-          "text": "PJH0957",
-          "source_box": [
-            483,
-            601,
-            715,
-            676
-          ]
+          "text": "99FT099"
         }
       ],
-      "source": "endtoend/br/PJH0957.jpg",
-      "sha256": "8c8cfc4ced1505481e7b6346c2efbfa1150373b252dc5d3f76b5f93a6ff52507"
+      "width": 720,
+      "height": 900,
+      "sha256": "5bebfce2127905a2be01be4e8d30d8886d6ebb7fb228372b65b96d0a0bb1993d"
     },
     {
-      "id": "PJK4867",
-      "image": "data/images/PJK4867.jpg",
+      "id": "car_6",
+      "image": "data/images/car_6.png",
+      "source_filename": "pictures/Azelow.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            741,
-            643,
-            1091,
-            756
+            131,
+            615,
+            261,
+            655
           ],
-          "text": "PJK4867",
-          "source_box": [
-            741,
-            643,
-            1091,
-            756
-          ]
+          "text": "99PZ697"
         }
       ],
-      "source": "endtoend/br/PJK4867.jpg",
-      "sha256": "08babf6f15c54dcfe7c1b8c915174134e32bd44a842061a82e76c7180fd6b905"
+      "width": 735,
+      "height": 965,
+      "sha256": "08339c4b25a2fb305501a71bb19bdf968074f395e1aba7cdbd85bb81dbdf68c2"
     },
     {
-      "id": "PJJ4955",
-      "image": "data/images/PJJ4955.jpg",
+      "id": "car_7",
+      "image": "data/images/car_7.png",
+      "source_filename": "pictures/Bmw Grey.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            397,
-            678,
-            709,
-            779
+            478,
+            694,
+            622,
+            746
           ],
-          "text": "PJJ4955",
-          "source_box": [
-            397,
-            678,
-            709,
-            779
-          ]
+          "text": "77KV767"
         }
       ],
-      "source": "endtoend/br/PJJ4955.jpg",
-      "sha256": "d17a9ace3b0409d27ed23dc0127121f347f2e72d7b4820cec03092eabc788a4d"
+      "width": 736,
+      "height": 981,
+      "sha256": "f4241ab5821b12fa7e9e9e9066935001bd412275578c12a179707f4a54fca99f"
     },
     {
-      "id": "OKS0078",
-      "image": "data/images/OKS0078.jpg",
+      "id": "car_8",
+      "image": "data/images/car_8.png",
+      "source_filename": "pictures/Bmw m5 f10 Baku.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            521,
-            675,
-            723,
-            740
+            274,
+            677,
+            439,
+            717
           ],
-          "text": "OKS0078",
-          "source_box": [
-            521,
-            675,
-            723,
-            740
-          ]
+          "text": "10TO012"
         }
       ],
-      "source": "endtoend/br/OKS0078.jpg",
-      "sha256": "c082b7aacb39cb62df3d23cf4cdfdad3d304d923820b2704169e5dd950060fcf"
+      "width": 736,
+      "height": 981,
+      "sha256": "1d95a904987466e0b0c7691bdda7bba04e89ea5fc57dd19fd70769b3390948ed"
     },
     {
-      "id": "NYI3834",
-      "image": "data/images/NYI3834.jpg",
+      "id": "car_9",
+      "image": "data/images/car_9.png",
+      "source_filename": "pictures/Changan Uni-V, Baku, Qaraba\u011f Atlar\u0131.jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
+            82,
+            460,
+            190,
+            508
+          ],
+          "text": "77XU117"
+        }
+      ],
+      "width": 736,
+      "height": 679,
+      "sha256": "fd68dc17afb32fc9d589c702f1c40ccb40942a3a1892771deb521c055efc3746"
+    },
+    {
+      "id": "car_10",
+      "image": "data/images/car_10.png",
+      "source_filename": "pictures/download (1).jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            341,
+            578,
+            471,
+            611
+          ],
+          "text": "55SS555"
+        }
+      ],
+      "width": 736,
+      "height": 828,
+      "sha256": "87629d8c0eb8c603f3d32e8a0720aa6ac8259db1d28321cf064c83f1803e2b68"
+    },
+    {
+      "id": "car_11",
+      "image": "data/images/car_11.png",
+      "source_filename": "pictures/download (2).jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            369,
+            424,
             518,
-            892,
-            846,
-            998
+            471
           ],
-          "text": "NYI3834",
-          "source_box": [
-            518,
-            892,
-            846,
-            998
-          ]
+          "text": "10RC110"
         }
       ],
-      "source": "endtoend/br/NYI3834.jpg",
-      "sha256": "db5857d9d44ab7da55aee3f9d82dec43bc8a3431ac0aa7dfa53746ff3cc2b38c"
+      "width": 736,
+      "height": 736,
+      "sha256": "df98f4bd839676bda998b5a13edec89354513675517ea8596f058729ac6949ef"
     },
     {
-      "id": "PUT6858",
-      "image": "data/images/PUT6858.jpg",
+      "id": "car_12",
+      "image": "data/images/car_12.png",
+      "source_filename": "pictures/download (3).jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            247,
-            475,
-            436,
-            536
+            127,
+            783,
+            265,
+            824
           ],
-          "text": "PUT6858",
-          "source_box": [
-            247,
-            475,
-            436,
-            536
-          ]
+          "text": "09BU966"
         }
       ],
-      "source": "endtoend/br/PUT6858.jpg",
-      "sha256": "d13b2cd28abf640b795c304c143c0f28a0be164000de558dc21571e05626e8d3"
+      "width": 736,
+      "height": 981,
+      "sha256": "37c533736f84c7e177566d525324a13ed281b103882798afe9df89bf18dc2759"
     },
     {
-      "id": "OZS6477",
-      "image": "data/images/OZS6477.jpg",
+      "id": "car_13",
+      "image": "data/images/car_13.png",
+      "source_filename": "pictures/download (4).jpg",
+      "format": "az",
       "split": "test",
-      "format": "br",
+      "annotation_status": "visually_annotated",
       "plates": [
         {
           "box": [
-            442,
-            781,
-            689,
-            861
+            452,
+            552,
+            573,
+            590
           ],
-          "text": "OZS6477",
-          "source_box": [
-            442,
-            781,
-            689,
-            861
-          ]
+          "text": "99OK555"
         }
       ],
-      "source": "endtoend/br/OZS6477.jpg",
-      "sha256": "13c3e5ec46b463221f8612cb296f7b9c9009658eba88daf4ef5c182bc7d97799"
+      "width": 736,
+      "height": 880,
+      "sha256": "854a33a220857228f430fa7e654cfbf4b547741a427c8101b0c3492af3b90a23"
     },
     {
-      "id": "JRK5336",
-      "image": "data/images/JRK5336.jpg",
+      "id": "car_14",
+      "image": "data/images/car_14.png",
+      "source_filename": "pictures/download.jpg",
+      "format": "az",
       "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            238,
+            433,
+            441,
+            478
+          ],
+          "text": "11LL111"
+        }
+      ],
+      "width": 682,
+      "height": 682,
+      "sha256": "6d029d272e24ada16e89c6f4daca3a09da3fc83fbcd48c89778e8c072d260212"
+    },
+    {
+      "id": "car_15",
+      "image": "data/images/car_15.png",
+      "source_filename": "pictures/Ferrari 812.jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            357,
+            699,
+            445,
+            725
+          ],
+          "text": "77CC777"
+        }
+      ],
+      "width": 736,
+      "height": 981,
+      "sha256": "bea8fc439865e8810f7bdb04c3844eef3702cb71923701de5ecf7ce843fdb6e9"
+    },
+    {
+      "id": "car_16",
+      "image": "data/images/car_16.png",
+      "source_filename": "pictures/\ud835\ude70\ud835\ude89\ud835\ude74\ud835\ude81\ud835\ude7b\ud835\ude7e\ud835\ude85\ud83c\udde6\ud83c\uddff.jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            103,
+            393,
+            228,
+            435
+          ],
+          "text": "10ZY124"
+        }
+      ],
+      "width": 640,
+      "height": 600,
+      "sha256": "5e1fe26201f8eb0ca569b3f40017e6107d41251deef583fe50bf3e8aea2f4165"
+    },
+    {
+      "id": "car_17",
+      "image": "data/images/car_17.png",
+      "source_filename": "pictures/\ud83d\udda4.jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            175,
+            579,
+            344,
+            617
+          ],
+          "text": "77RZ144"
+        }
+      ],
+      "width": 736,
+      "height": 1054,
+      "sha256": "c87ab601ff178cbdaf77c4e78cf20aecf353912e40a5c9c8993caebb4bd4de35"
+    },
+    {
+      "id": "car_18",
+      "image": "data/images/car_18.png",
+      "source_filename": "pictures/\ud83e\udd0d.jpg",
+      "format": "az",
+      "split": "test",
+      "annotation_status": "visually_annotated",
+      "plates": [
+        {
+          "box": [
+            464,
+            1109,
+            619,
+            1181
+          ],
+          "text": "10ZZ008"
+        }
+      ],
+      "width": 736,
+      "height": 1309,
+      "sha256": "230d94c58efad01a765186e2a55ecd02e99229a82fcd465e777d6c4fd1ccead2"
+    },
+    {
+      "id": "car_19",
+      "image": "data/images/car_19.png",
+      "source_filename": "endtoend/br/JRK5336.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
+      "split": "test",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
@@ -300,114 +433,18 @@
           ]
         }
       ],
-      "source": "endtoend/br/JRK5336.jpg",
-      "sha256": "a635ebfd249c6cb52b5ed40831c2d255f3f8159901a1acad882f1bcd814a69d8"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "2aeec951b75e2d5dc78e122dbfc8bb42b71f1dabfe341e263bea4c709374ab1d"
     },
     {
-      "id": "PJG0783",
-      "image": "data/images/PJG0783.jpg",
-      "split": "test",
+      "id": "car_20",
+      "image": "data/images/car_20.png",
+      "source_filename": "endtoend/br/PYB6477.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
-      "plates": [
-        {
-          "box": [
-            102,
-            520,
-            428,
-            625
-          ],
-          "text": "PJG0783",
-          "source_box": [
-            102,
-            520,
-            428,
-            625
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJG0783.jpg",
-      "sha256": "a91a5dacc0faf2be37219f989cab8db03f94bea06745d64f8e74d62cdadd0ac2"
-    },
-    {
-      "id": "OLE5095",
-      "image": "data/images/OLE5095.jpg",
       "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            485,
-            474,
-            741,
-            557
-          ],
-          "text": "OLE5095",
-          "source_box": [
-            485,
-            474,
-            741,
-            557
-          ]
-        }
-      ],
-      "source": "endtoend/br/OLE5095.jpg",
-      "sha256": "4b5146bfe4b40e49c65bdda1fdba7a4564fe75492ba7255f47eda18e0a0c5afa"
-    },
-    {
-      "id": "PJV9741",
-      "image": "data/images/PJV9741.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            495,
-            587,
-            840,
-            699
-          ],
-          "text": "PJV9741",
-          "source_box": [
-            495,
-            587,
-            840,
-            699
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJV9741.jpg",
-      "sha256": "a1295947995a0e004f218ffe2f7bd1d16b1a959155dd0e3efff8aeb00edf7c3e"
-    },
-    {
-      "id": "PJY5472",
-      "image": "data/images/PJY5472.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            570,
-            799,
-            836,
-            885
-          ],
-          "text": "PJY5472",
-          "source_box": [
-            570,
-            799,
-            836,
-            885
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJY5472.jpg",
-      "sha256": "1b3dc21dce7f678fd7c428b8948f2846fb601d0bbd4465c32725cc778dafe8d9"
-    },
-    {
-      "id": "PYB6477",
-      "image": "data/images/PYB6477.jpg",
-      "split": "test",
-      "format": "br",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
@@ -425,289 +462,18 @@
           ]
         }
       ],
-      "source": "endtoend/br/PYB6477.jpg",
-      "sha256": "97a6c4733a4f9ef1f6874150bc8f620b7c016650b4de1e78873d28cb1a92d6e7"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "79ee346064c5f3537c374d06a7281f96d7769eaf64b5fa73af47c1fa30df97ea"
     },
     {
-      "id": "PJB7392",
-      "image": "data/images/PJB7392.jpg",
-      "split": "test",
+      "id": "car_21",
+      "image": "data/images/car_21.png",
+      "source_filename": "endtoend/br/AYO9034.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
-      "plates": [
-        {
-          "box": [
-            424,
-            654,
-            612,
-            715
-          ],
-          "text": "PJB7392",
-          "source_box": [
-            424,
-            654,
-            612,
-            715
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJB7392.jpg",
-      "sha256": "7af26432e954f9efff12d84fbdebb3438d5ee3a5b4578d60c1ef33ace9bb7a86"
-    },
-    {
-      "id": "OKV8004",
-      "image": "data/images/OKV8004.jpg",
       "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            461,
-            805,
-            743,
-            896
-          ],
-          "text": "OKV8004",
-          "source_box": [
-            461,
-            805,
-            743,
-            896
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKV8004.jpg",
-      "sha256": "a894c0cd5500ff2cb097f6cecc608af4413d576641fc9d0ba625950adccc6722"
-    },
-    {
-      "id": "MYX3152",
-      "image": "data/images/MYX3152.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            366,
-            767,
-            697,
-            874
-          ],
-          "text": "MYX3152",
-          "source_box": [
-            366,
-            767,
-            697,
-            874
-          ]
-        }
-      ],
-      "source": "endtoend/br/MYX3152.jpg",
-      "sha256": "0f5df749bcf4f84e6800983fd220e402d8b641c16194d1ceb32cff7015b4dbe6"
-    },
-    {
-      "id": "OLB4809",
-      "image": "data/images/OLB4809.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            527,
-            421,
-            717,
-            482
-          ],
-          "text": "OLB4809",
-          "source_box": [
-            527,
-            421,
-            717,
-            482
-          ]
-        }
-      ],
-      "source": "endtoend/br/OLB4809.jpg",
-      "sha256": "fd6817aaf200a465fb569b54f69894d3df799dbb5760c14b6ae4a0ea167c85e9"
-    },
-    {
-      "id": "PJI5921",
-      "image": "data/images/PJI5921.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            553,
-            582,
-            798,
-            661
-          ],
-          "text": "PJI5921",
-          "source_box": [
-            553,
-            582,
-            798,
-            661
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJI5921.jpg",
-      "sha256": "40918cb496a700f412335972b0f9a10d0d1d3375ae40f096b770f7320440797f"
-    },
-    {
-      "id": "PJC4903",
-      "image": "data/images/PJC4903.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            540,
-            750,
-            829,
-            843
-          ],
-          "text": "PJC4903",
-          "source_box": [
-            540,
-            750,
-            829,
-            843
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJC4903.jpg",
-      "sha256": "236c862358d707f8b7a193861082035bdfaa6f7b0f61ae5be301a0aa51c08745"
-    },
-    {
-      "id": "OZK6717",
-      "image": "data/images/OZK6717.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            453,
-            577,
-            718,
-            663
-          ],
-          "text": "OZK6717",
-          "source_box": [
-            453,
-            577,
-            718,
-            663
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZK6717.jpg",
-      "sha256": "4aef53de22c2f4ff9312364348a8a81688cc673f488ed16683178eacb3dd8db0"
-    },
-    {
-      "id": "NYY1710",
-      "image": "data/images/NYY1710.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            516,
-            437,
-            759,
-            515
-          ],
-          "text": "NYY1710",
-          "source_box": [
-            516,
-            437,
-            759,
-            515
-          ]
-        }
-      ],
-      "source": "endtoend/br/NYY1710.jpg",
-      "sha256": "4174a06d93bb060797d8fb2babaa14bc5fa49e2c183af8ae6639c848a049ac11"
-    },
-    {
-      "id": "JPQ9870",
-      "image": "data/images/JPQ9870.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            571,
-            623,
-            891,
-            727
-          ],
-          "text": "JPQ9870",
-          "source_box": [
-            571,
-            623,
-            891,
-            727
-          ]
-        }
-      ],
-      "source": "endtoend/br/JPQ9870.jpg",
-      "sha256": "d39dbf3bed01e58263382ffb153159730c4ebd60a4b99e88473fe4bff1f65ea4"
-    },
-    {
-      "id": "NZU2673",
-      "image": "data/images/NZU2673.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            501,
-            816,
-            776,
-            905
-          ],
-          "text": "NZU2673",
-          "source_box": [
-            501,
-            816,
-            776,
-            905
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZU2673.jpg",
-      "sha256": "2341bb9c3d55afddbbafc3751087a0a71cb6fee72a2bc86f7bcab39888a7d534"
-    },
-    {
-      "id": "PJI7589",
-      "image": "data/images/PJI7589.jpg",
-      "split": "test",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            385,
-            688,
-            649,
-            773
-          ],
-          "text": "PJI7589",
-          "source_box": [
-            385,
-            688,
-            649,
-            773
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJI7589.jpg",
-      "sha256": "c8e70e554e9cbe0a11ccaeb5c78516a2fe2476ab13e9e604a8c8c595fe2669c7"
-    },
-    {
-      "id": "AYO9034",
-      "image": "data/images/AYO9034.jpg",
-      "split": "test",
-      "format": "br",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
@@ -725,2133 +491,125 @@
           ]
         }
       ],
-      "source": "endtoend/br/AYO9034.jpg",
-      "sha256": "9d161ee053e43688af2595d58f0f163d4b00814137134a4e7c53f981960846a8"
+      "width": 1280,
+      "height": 720,
+      "sha256": "740c61997b59f6c181e5dd48fd02bbacd2e406959f1134ddabf0c4e9e90b03cc"
     },
     {
-      "id": "OUZ2198",
-      "image": "data/images/OUZ2198.jpg",
+      "id": "car_22",
+      "image": "data/images/car_22.png",
+      "source_filename": "endtoend/br/JRV1942.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
+      "format": "br",
       "split": "test",
-      "format": "br",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
-            480,
-            453,
-            711,
-            528
-          ],
-          "text": "OUZ2198",
-          "source_box": [
-            480,
-            453,
-            711,
-            528
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUZ2198.jpg",
-      "sha256": "01edc3d63633146bb4324af96b45424d23ae2578dcab7fd4722d39ca5e12b2f9"
-    },
-    {
-      "id": "OZU5764",
-      "image": "data/images/OZU5764.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            431,
-            341,
-            769,
-            450
-          ],
-          "text": "OZU5764",
-          "source_box": [
-            431,
-            341,
-            769,
-            450
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZU5764.jpg",
-      "sha256": "cc777c5b09dfebf362be6fa4a93497651cc8d61ab61b285d49e5015da501f47e"
-    },
-    {
-      "id": "JOG9221",
-      "image": "data/images/JOG9221.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            522,
-            572,
-            779,
-            655
-          ],
-          "text": "JOG9221",
-          "source_box": [
-            522,
-            572,
-            779,
-            655
-          ]
-        }
-      ],
-      "source": "endtoend/br/JOG9221.jpg",
-      "sha256": "6bd6b4821c60d1f895013fa815eedac7261a357cb1028400cf8dfe95a42e81e2"
-    },
-    {
-      "id": "PJI5396",
-      "image": "data/images/PJI5396.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            450,
-            747,
-            788,
-            856
-          ],
-          "text": "PJI5396",
-          "source_box": [
-            450,
-            747,
-            788,
-            856
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJI5396.jpg",
-      "sha256": "92d3ca28ef5f430263e03d364bdb506eeb164b18c2ff93f2adb249f5cc6eafed"
-    },
-    {
-      "id": "JSG9648",
-      "image": "data/images/JSG9648.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            571,
-            570,
-            798,
-            643
-          ],
-          "text": "JSG9648",
-          "source_box": [
-            571,
-            570,
-            798,
-            643
-          ]
-        }
-      ],
-      "source": "endtoend/br/JSG9648.jpg",
-      "sha256": "b218f0b9307545efa92524e356f7ec20be78db48ef3284df4e5fdffb65c9c651"
-    },
-    {
-      "id": "NZF7823",
-      "image": "data/images/NZF7823.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            511,
-            690,
-            726,
-            759
-          ],
-          "text": "NZF7823",
-          "source_box": [
-            511,
-            690,
-            726,
-            759
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZF7823.jpg",
-      "sha256": "ec1110382bb1040e93b3c0503f0c602613416c6e193b5a64243b40757a275d3d"
-    },
-    {
-      "id": "OZC8400",
-      "image": "data/images/OZC8400.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            475,
-            646,
-            850,
-            767
-          ],
-          "text": "OZC8400",
-          "source_box": [
-            475,
-            646,
-            850,
-            767
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZC8400.jpg",
-      "sha256": "573c57bbe08b000f527aaec210a68547adcc492813c85e811d1a642fefe04087"
-    },
-    {
-      "id": "OUH9191",
-      "image": "data/images/OUH9191.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            520,
-            433,
-            742,
-            505
-          ],
-          "text": "OUH9191",
-          "source_box": [
-            520,
-            433,
-            742,
-            505
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUH9191.jpg",
-      "sha256": "a8ae1810ee57bc10ae36bde7ba8433adfa34b150e2015815b1ab4da94cf18b48"
-    },
-    {
-      "id": "JST2699",
-      "image": "data/images/JST2699.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            376,
-            771,
-            839,
-            921
-          ],
-          "text": "JST2699",
-          "source_box": [
-            376,
-            771,
-            839,
-            921
-          ]
-        }
-      ],
-      "source": "endtoend/br/JST2699.jpg",
-      "sha256": "880a918d8fa7967872f75430b2a0f83d3a8022027482fe3eebd96d6f228a6bf7"
-    },
-    {
-      "id": "PVX0095",
-      "image": "data/images/PVX0095.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            34,
-            115,
-            494,
-            264
-          ],
-          "text": "PVX0095",
-          "source_box": [
-            34,
-            115,
-            494,
-            264
-          ]
-        }
-      ],
-      "source": "endtoend/br/PVX0095.jpg",
-      "sha256": "4db6d6b485c91aef84444976afe490464720939195d6bda533dae12f52c773c9"
-    },
-    {
-      "id": "OUN4297",
-      "image": "data/images/OUN4297.jpg",
-      "split": "val",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            519,
-            434,
-            767,
-            514
-          ],
-          "text": "OUN4297",
-          "source_box": [
-            519,
-            434,
-            767,
-            514
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUN4297.jpg",
-      "sha256": "d2c2f19f2507aa4dae73f71bd7be7ff962784a8aa64c15e071e5da518a79fdb9"
-    },
-    {
-      "id": "PJP8208",
-      "image": "data/images/PJP8208.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            176,
-            489,
-            446,
-            576
-          ],
-          "text": "PJP8208",
-          "source_box": [
-            176,
-            489,
-            446,
-            576
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJP8208.jpg",
-      "sha256": "462e246ad196ba79dfe9d3fedaadb605d906a00c644e55c8bb8daff986730065"
-    },
-    {
-      "id": "PJU2853",
-      "image": "data/images/PJU2853.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            434,
-            721,
-            713,
-            811
-          ],
-          "text": "PJU2853",
-          "source_box": [
-            434,
-            721,
-            713,
-            811
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJU2853.jpg",
-      "sha256": "9e15b81bc25885ab93483828afb2313706c2fe7175b3cfa8ac98c9c9ff971d7f"
-    },
-    {
-      "id": "HPM9362",
-      "image": "data/images/HPM9362.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            584,
-            673,
-            843,
-            757
-          ],
-          "text": "HPM9362",
-          "source_box": [
-            584,
-            673,
-            843,
-            757
-          ]
-        }
-      ],
-      "source": "endtoend/br/HPM9362.jpg",
-      "sha256": "6892cb29ff8fd6a03464f0124697b581345d5a2739cbcb635356519ef7c5ddc1"
-    },
-    {
-      "id": "OUP1442",
-      "image": "data/images/OUP1442.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            622,
-            717,
-            833,
-            785
-          ],
-          "text": "OUP1442",
-          "source_box": [
-            622,
-            717,
-            833,
-            785
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUP1442.jpg",
-      "sha256": "b69f614263d7ed42437a44b8bdec946280a7257e33a3a635069651adec63d362"
-    },
-    {
-      "id": "OKP7250",
-      "image": "data/images/OKP7250.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            499,
-            921,
-            815,
-            1023
-          ],
-          "text": "OKP7250",
-          "source_box": [
-            499,
-            921,
-            815,
-            1023
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKP7250.jpg",
-      "sha256": "72b4fcbf078b3a479919be2a7c6d5b45cb65f8471d6440c6ea4a983e28f21d59"
-    },
-    {
-      "id": "OZV6697",
-      "image": "data/images/OZV6697.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            429,
-            424,
-            720,
-            518
-          ],
-          "text": "OZV6697",
-          "source_box": [
-            429,
-            424,
-            720,
-            518
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZV6697.jpg",
-      "sha256": "25dccc63281b356dea6dc3c596c589aac638a79a7021694f82181c397bec04a5"
-    },
-    {
-      "id": "NTO1053",
-      "image": "data/images/NTO1053.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            560,
-            552,
-            851,
-            646
-          ],
-          "text": "NTO1053",
-          "source_box": [
-            560,
-            552,
-            851,
-            646
-          ]
-        }
-      ],
-      "source": "endtoend/br/NTO1053.jpg",
-      "sha256": "e38c2b5b7d1a6e3cd9628d1e5de1071cf9e8700c53dfeaf4ebe2055b355ebe6b"
-    },
-    {
-      "id": "OZK4620",
-      "image": "data/images/OZK4620.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            830,
-            593,
-            1201,
-            713
-          ],
-          "text": "OZK4620",
-          "source_box": [
-            830,
-            593,
-            1201,
-            713
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZK4620.jpg",
-      "sha256": "a6b851c639275b6fd7e3bfa90316e41eb521c7e465457e62f31086d41a0bc3e2"
-    },
-    {
-      "id": "OYJ9557",
-      "image": "data/images/OYJ9557.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            493,
-            640,
-            726,
-            715
-          ],
-          "text": "OYJ9557",
-          "source_box": [
-            493,
-            640,
-            726,
-            715
-          ]
-        }
-      ],
-      "source": "endtoend/br/OYJ9557.jpg",
-      "sha256": "76cb55b74bd30f590f08fa4783d272e1315cc6ea156c95a6eb33ec5888e5e82e"
-    },
-    {
-      "id": "JRD2238",
-      "image": "data/images/JRD2238.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            416,
-            597,
-            569,
-            646
-          ],
-          "text": "JRD2238",
-          "source_box": [
-            416,
-            597,
-            569,
-            646
-          ]
-        }
-      ],
-      "source": "endtoend/br/JRD2238.jpg",
-      "sha256": "a7e25321be40610f1e507da1703adf601c67d2e265b4fd1a49714ce1895a08b5"
-    },
-    {
-      "id": "OKM2371",
-      "image": "data/images/OKM2371.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            367,
-            927,
-            608,
-            1005
-          ],
-          "text": "OKM2371",
-          "source_box": [
-            367,
-            927,
-            608,
-            1005
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKM2371.jpg",
-      "sha256": "dd997d2fefe24b19c5a1d9b634fca003602aead257f049668d1cdac1fee2ad3f"
-    },
-    {
-      "id": "PWF3266",
-      "image": "data/images/PWF3266.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            437,
-            748,
-            732,
-            843
-          ],
-          "text": "PWF3266",
-          "source_box": [
-            437,
-            748,
-            732,
-            843
-          ]
-        }
-      ],
-      "source": "endtoend/br/PWF3266.jpg",
-      "sha256": "e00e609d1e9bbac2abb86510d1104d8860ab9577b05464950463c44f6c7b4f7e"
-    },
-    {
-      "id": "JSK5419",
-      "image": "data/images/JSK5419.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            495,
-            613,
-            839,
-            724
-          ],
-          "text": "JSK5419",
-          "source_box": [
-            495,
-            613,
-            839,
-            724
-          ]
-        }
-      ],
-      "source": "endtoend/br/JSK5419.jpg",
-      "sha256": "bbc94a7fb3ed24280ab234f37444670d8c4a80569de2153a43fc8c8132a7dba8"
-    },
-    {
-      "id": "NTK5785",
-      "image": "data/images/NTK5785.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            521,
-            679,
-            766,
-            758
-          ],
-          "text": "NTK5785",
-          "source_box": [
-            521,
-            679,
-            766,
-            758
-          ]
-        }
-      ],
-      "source": "endtoend/br/NTK5785.jpg",
-      "sha256": "62c1ad4baa5c1069d2135d10e80f0326d10254ae5d225f75bb6ae7a91cb0de2b"
-    },
-    {
-      "id": "GWT2180",
-      "image": "data/images/GWT2180.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            529,
-            308,
-            756,
-            381
-          ],
-          "text": "GWT2180",
-          "source_box": [
-            529,
-            308,
-            756,
-            381
-          ]
-        }
-      ],
-      "source": "endtoend/br/GWT2180.jpg",
-      "sha256": "ede62f78c8715b23faa5196c6af6607d56c241b2303088be10b62d5c8b3683ec"
-    },
-    {
-      "id": "PWC0633",
-      "image": "data/images/PWC0633.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            449,
-            622,
-            693,
-            701
-          ],
-          "text": "PWC0633",
-          "source_box": [
-            449,
-            622,
-            693,
-            701
-          ]
-        }
-      ],
-      "source": "endtoend/br/PWC0633.jpg",
-      "sha256": "72037088002718945d56c9e86083c8a913d4e85c03e0fe8150d52da371f86289"
-    },
-    {
-      "id": "JQS5683",
-      "image": "data/images/JQS5683.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            512,
-            537,
-            693,
-            595
-          ],
-          "text": "JQS5683",
-          "source_box": [
-            512,
-            537,
-            693,
-            595
-          ]
-        }
-      ],
-      "source": "endtoend/br/JQS5683.jpg",
-      "sha256": "af5b501482e9fcffb12c590c5de31eb28b81a433afd8f9f699a5aa9acaf18dcc"
-    },
-    {
-      "id": "PJD2685",
-      "image": "data/images/PJD2685.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            218,
-            624,
-            479,
-            708
-          ],
-          "text": "PJD2685",
-          "source_box": [
-            218,
-            624,
-            479,
-            708
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJD2685.jpg",
-      "sha256": "b2b2493199abe17b0a36279b33a5bdacc9087ca2c0571c2748e7799455f9b6d2"
-    },
-    {
-      "id": "PJY8509",
-      "image": "data/images/PJY8509.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            497,
-            745,
-            730,
-            820
-          ],
-          "text": "PJY8509",
-          "source_box": [
-            497,
-            745,
-            730,
-            820
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJY8509.jpg",
-      "sha256": "f51c6f06d31c15d6fea9c7198d3bf3ac51ad8434bf3d3e773da8e5efbfe4da26"
-    },
-    {
-      "id": "ODJ1599",
-      "image": "data/images/ODJ1599.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            562,
-            534,
-            904,
-            645
-          ],
-          "text": "ODJ1599",
-          "source_box": [
-            562,
-            534,
-            904,
-            645
-          ]
-        }
-      ],
-      "source": "endtoend/br/ODJ1599.jpg",
-      "sha256": "c42f8c2aaf2781dde3aa2e2f043829fa4e13b46bbdbc738e442e45b3d6fc0919"
-    },
-    {
-      "id": "OUG6157",
-      "image": "data/images/OUG6157.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            614,
-            551,
-            831,
-            621
-          ],
-          "text": "OUG6157",
-          "source_box": [
-            614,
-            551,
-            831,
-            621
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUG6157.jpg",
-      "sha256": "7a75c4a369ca85fb98463d786e4792033d8dedff787d9b483a981b8d47c5b70f"
-    },
-    {
-      "id": "OLC4728",
-      "image": "data/images/OLC4728.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            517,
-            412,
-            784,
-            498
-          ],
-          "text": "OLC4728",
-          "source_box": [
-            517,
-            412,
-            784,
-            498
-          ]
-        }
-      ],
-      "source": "endtoend/br/OLC4728.jpg",
-      "sha256": "af1d0f81c04919bcc7082ad4d71220b2c49618c21f92bbd0114a50cbe49a51d1"
-    },
-    {
-      "id": "PJB2414",
-      "image": "data/images/PJB2414.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            419,
-            308,
-            787,
-            427
-          ],
-          "text": "PJB2414",
-          "source_box": [
-            419,
-            308,
-            787,
-            427
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJB2414.jpg",
-      "sha256": "2b8a93a11a658493bb4e84660d760604d3fe38068bb1925bf5653a1f3d194ae8"
-    },
-    {
-      "id": "PJP2783",
-      "image": "data/images/PJP2783.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            439,
-            817,
-            818,
-            940
-          ],
-          "text": "PJP2783",
-          "source_box": [
-            439,
-            817,
-            818,
-            940
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJP2783.jpg",
-      "sha256": "bfc986ea6def00726de55936d6ebdef22128af56f552147c2cdc91531f6cbd83"
-    },
-    {
-      "id": "JSP7678",
-      "image": "data/images/JSP7678.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            417,
-            485,
-            778,
-            602
-          ],
-          "text": "JSP7678",
-          "source_box": [
-            417,
-            485,
-            778,
-            602
-          ]
-        }
-      ],
-      "source": "endtoend/br/JSP7678.jpg",
-      "sha256": "c0e4328f3cf48780432640ece64c3ab55ee42a83351ac36d0a5e94951f9578bd"
-    },
-    {
-      "id": "FZB9581",
-      "image": "data/images/FZB9581.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            967,
-            493,
-            1225,
-            576
-          ],
-          "text": "FZB9581",
-          "source_box": [
-            967,
-            493,
-            1225,
-            576
-          ]
-        }
-      ],
-      "source": "endtoend/br/FZB9581.jpg",
-      "sha256": "e4c3a0d697ceda91f73e1bbf549736a1c10633e8446f51f3b374cfe6359ef28b"
-    },
-    {
-      "id": "MXQ1601",
-      "image": "data/images/MXQ1601.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            475,
-            891,
-            814,
-            1001
-          ],
-          "text": "MXQ1601",
-          "source_box": [
-            475,
-            891,
-            814,
-            1001
-          ]
-        }
-      ],
-      "source": "endtoend/br/MXQ1601.jpg",
-      "sha256": "39ee67b4817d886c3917789496243b6cb8de6186560f4385fb6ec5d9926f2c74"
-    },
-    {
-      "id": "NTV0498",
-      "image": "data/images/NTV0498.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            622,
-            658,
-            861,
-            735
-          ],
-          "text": "NTV0498",
-          "source_box": [
-            622,
-            658,
-            861,
-            735
-          ]
-        }
-      ],
-      "source": "endtoend/br/NTV0498.jpg",
-      "sha256": "52776d082d394352bbfa3eb27ac80a4e7b16c4a07397fce1f6b2852fe0b142ac"
-    },
-    {
-      "id": "PXP8172",
-      "image": "data/images/PXP8172.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            576,
-            876,
-            816,
-            954
-          ],
-          "text": "PXP8172",
-          "source_box": [
-            576,
-            876,
-            816,
-            954
-          ]
-        }
-      ],
-      "source": "endtoend/br/PXP8172.jpg",
-      "sha256": "c4d1033b7b7e6e3db0c7c6568a066297837cacf8a8fbece0038fcb13df582cc0"
-    },
-    {
-      "id": "OLC7676",
-      "image": "data/images/OLC7676.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            524,
-            412,
-            767,
-            490
-          ],
-          "text": "OLC7676",
-          "source_box": [
-            524,
-            412,
-            767,
-            490
-          ]
-        }
-      ],
-      "source": "endtoend/br/OLC7676.jpg",
-      "sha256": "854856b68fe1f93f0f94147198bcd60f092587b21e2e0dd157a2c16926b18ece"
-    },
-    {
-      "id": "OKM0944",
-      "image": "data/images/OKM0944.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            300,
-            595,
-            526,
-            668
-          ],
-          "text": "OKM0944",
-          "source_box": [
-            300,
-            595,
-            526,
-            668
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKM0944.jpg",
-      "sha256": "7ada973b75fbe1cfc55c5cca15d8a349abf5618473edefac29f02e6dcdaa52b9"
-    },
-    {
-      "id": "JIT7463",
-      "image": "data/images/JIT7463.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            215,
-            502,
-            365,
-            550
-          ],
-          "text": "JIT7463",
-          "source_box": [
-            215,
-            502,
-            365,
-            550
-          ]
-        }
-      ],
-      "source": "endtoend/br/JIT7463.jpg",
-      "sha256": "62b3fc3667cf0d4c0c2fcf79d141c38b27fdd9048af613842a88ddcaaa12bf2c"
-    },
-    {
-      "id": "OZG3580",
-      "image": "data/images/OZG3580.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            459,
-            566,
-            891,
+            561,
+            621,
+            824,
             706
           ],
-          "text": "OZG3580",
+          "text": "JRV1942",
           "source_box": [
-            459,
-            566,
-            891,
+            561,
+            621,
+            824,
             706
           ]
         }
       ],
-      "source": "endtoend/br/OZG3580.jpg",
-      "sha256": "59df46a1212277a1fe5b6111a1e2c8b2a0b11a9a4cf72b1e2e8a48ede51b1d76"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "fd034b240ec2a59cf913b1afa3a2b360b581cdc3a39b927081120700cab70a95"
     },
     {
-      "id": "PAG5219",
-      "image": "data/images/PAG5219.jpg",
-      "split": "train",
+      "id": "car_23",
+      "image": "data/images/car_23.png",
+      "source_filename": "endtoend/br/PJH0957.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
+      "split": "test",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
-            528,
-            568,
-            756,
-            642
+            483,
+            601,
+            715,
+            676
           ],
-          "text": "PAG5219",
+          "text": "PJH0957",
           "source_box": [
-            528,
-            568,
-            756,
-            642
+            483,
+            601,
+            715,
+            676
           ]
         }
       ],
-      "source": "endtoend/br/PAG5219.jpg",
-      "sha256": "0fc709bc53dffd59cd0dfe24dbb513b28b1c4d94a2d2b2a1c975cd271e7526c0"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "d03770ee6bd0f7d08469509bfe49a3578b90c89a4c52bf69c950a848510419de"
     },
     {
-      "id": "OKL0817",
-      "image": "data/images/OKL0817.jpg",
-      "split": "train",
+      "id": "car_24",
+      "image": "data/images/car_24.png",
+      "source_filename": "endtoend/br/PJJ4955.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
+      "split": "test",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
-            478,
-            414,
-            726,
-            494
-          ],
-          "text": "OKL0817",
-          "source_box": [
-            478,
-            414,
-            726,
-            494
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKL0817.jpg",
-      "sha256": "51f55f16b66b51219d1b75868f6e0321f48f54d9881a5635ee613a77d5409a64"
-    },
-    {
-      "id": "NYM7544",
-      "image": "data/images/NYM7544.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            367,
-            799,
-            648,
-            890
-          ],
-          "text": "NYM7544",
-          "source_box": [
-            367,
-            799,
-            648,
-            890
-          ]
-        }
-      ],
-      "source": "endtoend/br/NYM7544.jpg",
-      "sha256": "04aca292a551ca1b9bb9c9686f229e6290a69ba05a9a4d6a60f57cbe7f37843e"
-    },
-    {
-      "id": "PJT2905",
-      "image": "data/images/PJT2905.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            0,
-            574,
-            269,
-            661
-          ],
-          "text": "PJT2905",
-          "source_box": [
-            -1,
-            574,
-            269,
-            661
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJT2905.jpg",
-      "sha256": "e5ce0875b0290ceff3e3c2c424877ccffa12dfa7837a56f678ecbf6e5b955ab5"
-    },
-    {
-      "id": "OVA1319",
-      "image": "data/images/OVA1319.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            430,
-            653,
-            686,
-            736
-          ],
-          "text": "OVA1319",
-          "source_box": [
-            430,
-            653,
-            686,
-            736
-          ]
-        }
-      ],
-      "source": "endtoend/br/OVA1319.jpg",
-      "sha256": "bc82e1dfb5ac47dbd9f7a6d9119860917e382f152f5e2210ffe0ebe52e3acdb8"
-    },
-    {
-      "id": "OLA1208",
-      "image": "data/images/OLA1208.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            436,
-            493,
-            720,
-            585
-          ],
-          "text": "OLA1208",
-          "source_box": [
-            436,
-            493,
-            720,
-            585
-          ]
-        }
-      ],
-      "source": "endtoend/br/OLA1208.jpg",
-      "sha256": "a513b259f400d5afbf8ad0e605438a10f217d90bb1919fc99feee3ea42da0c4d"
-    },
-    {
-      "id": "JQV5526",
-      "image": "data/images/JQV5526.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            369,
-            721,
-            642,
-            809
-          ],
-          "text": "JQV5526",
-          "source_box": [
-            369,
-            721,
-            642,
-            809
-          ]
-        }
-      ],
-      "source": "endtoend/br/JQV5526.jpg",
-      "sha256": "486c84e2ea175ab7931c3109bad65dfb1a7f1a618b1ca0cd56aecd909a9884ca"
-    },
-    {
-      "id": "OVK3653",
-      "image": "data/images/OVK3653.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            484,
-            360,
-            850,
-            478
-          ],
-          "text": "OVK3653",
-          "source_box": [
-            484,
-            360,
-            850,
-            478
-          ]
-        }
-      ],
-      "source": "endtoend/br/OVK3653.jpg",
-      "sha256": "d272d7d3f9c45574c315242928ef89e074c533493657e2c7f6444f2c413f55c1"
-    },
-    {
-      "id": "OUP9563",
-      "image": "data/images/OUP9563.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            502,
-            617,
-            757,
-            699
-          ],
-          "text": "OUP9563",
-          "source_box": [
-            502,
-            617,
-            757,
-            699
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUP9563.jpg",
-      "sha256": "089e7fa73758f4cb6c1dfae619e915361004715e53810263a9bacef67c5b5303"
-    },
-    {
-      "id": "OKT3896",
-      "image": "data/images/OKT3896.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            466,
-            697,
-            707,
-            775
-          ],
-          "text": "OKT3896",
-          "source_box": [
-            466,
-            697,
-            707,
-            775
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKT3896.jpg",
-      "sha256": "78f8e848e2851380660a40c48aec3d1341132221f01fa901102fa432233bfbb9"
-    },
-    {
-      "id": "OCX4764",
-      "image": "data/images/OCX4764.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            424,
-            702,
-            681,
-            785
-          ],
-          "text": "OCX4764",
-          "source_box": [
-            424,
-            702,
-            681,
-            785
-          ]
-        }
-      ],
-      "source": "endtoend/br/OCX4764.jpg",
-      "sha256": "ca0f3949326f1c799393c2e8fe44f08d4cabf9ad52db074e1aa1ebc4b93d165e"
-    },
-    {
-      "id": "MTW5608",
-      "image": "data/images/MTW5608.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            438,
-            577,
-            776,
-            686
-          ],
-          "text": "MTW5608",
-          "source_box": [
-            438,
-            577,
-            776,
-            686
-          ]
-        }
-      ],
-      "source": "endtoend/br/MTW5608.jpg",
-      "sha256": "e277aeb2ae0b37228bca54d82104101523d55ede1464b8a0ddc6e5e82dbb9640"
-    },
-    {
-      "id": "OUM7311",
-      "image": "data/images/OUM7311.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            512,
-            477,
-            719,
-            544
-          ],
-          "text": "OUM7311",
-          "source_box": [
-            512,
-            477,
-            719,
-            544
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUM7311.jpg",
-      "sha256": "0885b90a6f7e37cfee3ec24b3b1b9eaa2fac6fba1e6b1b414ab832054b30a9f6"
-    },
-    {
-      "id": "PJF5797",
-      "image": "data/images/PJF5797.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            530,
-            642,
-            765,
-            718
-          ],
-          "text": "PJF5797",
-          "source_box": [
-            530,
-            642,
-            765,
-            718
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJF5797.jpg",
-      "sha256": "be222a3d1fdab6fe77f601642d7a659945826c157e42506d2727378dfe5b952f"
-    },
-    {
-      "id": "OZU2104",
-      "image": "data/images/OZU2104.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            445,
-            669,
-            779,
-            777
-          ],
-          "text": "OZU2104",
-          "source_box": [
-            445,
-            669,
-            779,
-            777
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZU2104.jpg",
-      "sha256": "2b3fecb92988a29c1f12cbdd289164d20b29172569d30a8edc751fa8e2706138"
-    },
-    {
-      "id": "OEL1145",
-      "image": "data/images/OEL1145.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            231,
-            668,
-            543,
-            769
-          ],
-          "text": "OEL1145",
-          "source_box": [
-            231,
-            668,
-            543,
-            769
-          ]
-        }
-      ],
-      "source": "endtoend/br/OEL1145.jpg",
-      "sha256": "e1f57e1e316fb2d4fe8caa7fbc0941c5c2601da102360e9d66986d4ef6e37c2e"
-    },
-    {
-      "id": "JIY4434",
-      "image": "data/images/JIY4434.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            687,
-            351,
-            905,
-            421
-          ],
-          "text": "JIY4434",
-          "source_box": [
-            687,
-            351,
-            905,
-            421
-          ]
-        }
-      ],
-      "source": "endtoend/br/JIY4434.jpg",
-      "sha256": "80961827a92b98b34aa2a7bd4e95a35f2e5c09b8cc4d80119d5ded41b51d95fe"
-    },
-    {
-      "id": "PJT4884",
-      "image": "data/images/PJT4884.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            523,
-            689,
-            755,
-            764
-          ],
-          "text": "PJT4884",
-          "source_box": [
-            523,
-            689,
-            755,
-            764
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJT4884.jpg",
-      "sha256": "7f766deec0fe476cb32840ddc61074657890dbd5be70b42691aa3210cdc4a767"
-    },
-    {
-      "id": "JSC7486",
-      "image": "data/images/JSC7486.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            422,
-            624,
-            716,
-            719
-          ],
-          "text": "JSC7486",
-          "source_box": [
-            422,
-            624,
-            716,
-            719
-          ]
-        }
-      ],
-      "source": "endtoend/br/JSC7486.jpg",
-      "sha256": "0df8a8f1b33e0a7c172351ee72e18d5968e72be57503de2964940cfba2424f99"
-    },
-    {
-      "id": "PJU2207",
-      "image": "data/images/PJU2207.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            422,
-            914,
-            819,
-            1043
-          ],
-          "text": "PJU2207",
-          "source_box": [
-            422,
-            914,
-            819,
-            1043
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJU2207.jpg",
-      "sha256": "efe6406d9e9a82eb6780f2b5f999ae01d0d55328909c83afc21313657b3e4002"
-    },
-    {
-      "id": "NZF0384",
-      "image": "data/images/NZF0384.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            546,
-            729,
-            773,
-            802
-          ],
-          "text": "NZF0384",
-          "source_box": [
-            546,
-            729,
-            773,
-            802
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZF0384.jpg",
-      "sha256": "1d95e4cba740cedd1f849f16a7d36831670c65a2584e7f9682c51958983bbe19"
-    },
-    {
-      "id": "PJF4224",
-      "image": "data/images/PJF4224.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            634,
-            805,
-            897,
-            890
-          ],
-          "text": "PJF4224",
-          "source_box": [
-            634,
-            805,
-            897,
-            890
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJF4224.jpg",
-      "sha256": "d6e6af29ac84d288578728fa2f7bf3557d6614585fc4360f9c24502b5185a3b5"
-    },
-    {
-      "id": "JSQ1413",
-      "image": "data/images/JSQ1413.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            553,
-            806,
-            832,
-            896
-          ],
-          "text": "JSQ1413",
-          "source_box": [
-            553,
-            806,
-            832,
-            896
-          ]
-        }
-      ],
-      "source": "endtoend/br/JSQ1413.jpg",
-      "sha256": "a30ee19f625e472c9afac333dc35fb67214e7e919a2fa48d4bb53255fb705512"
-    },
-    {
-      "id": "NZW2197",
-      "image": "data/images/NZW2197.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            485,
-            844,
-            830,
-            956
-          ],
-          "text": "NZW2197",
-          "source_box": [
-            485,
-            844,
-            830,
-            956
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZW2197.jpg",
-      "sha256": "8d82eb753ff12b93b24508bcb7dcef612a96ae2607257d2e797d43b2528d97a7"
-    },
-    {
-      "id": "NZP8292",
-      "image": "data/images/NZP8292.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            559,
-            637,
-            865,
-            736
-          ],
-          "text": "NZP8292",
-          "source_box": [
-            559,
-            637,
-            865,
-            736
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZP8292.jpg",
-      "sha256": "7c92c3984e4fe3af7ee2da38c00442c283ba746c9285a4a2240b026a5028fa78"
-    },
-    {
-      "id": "OUW5216",
-      "image": "data/images/OUW5216.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            535,
-            478,
-            771,
-            554
-          ],
-          "text": "OUW5216",
-          "source_box": [
-            535,
-            478,
-            771,
-            554
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUW5216.jpg",
-      "sha256": "4d92979a12cead50be107d269134fa593b457c95846a74c9a65d9fed08fb7fef"
-    },
-    {
-      "id": "NZJ6581",
-      "image": "data/images/NZJ6581.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            514,
-            769,
-            775,
-            853
-          ],
-          "text": "NZJ6581",
-          "source_box": [
-            514,
-            769,
-            775,
-            853
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZJ6581.jpg",
-      "sha256": "6424a0936ccbc2a0ff277b888f457405d3a0aa3e90c94ae3367b01e548e6b305"
-    },
-    {
-      "id": "NYL3614",
-      "image": "data/images/NYL3614.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            449,
-            664,
-            711,
-            749
-          ],
-          "text": "NYL3614",
-          "source_box": [
-            449,
-            664,
-            711,
-            749
-          ]
-        }
-      ],
-      "source": "endtoend/br/NYL3614.jpg",
-      "sha256": "7b64ae2a34aa62e1bb7c76fc00bedd7df0973f4c36675d8c4e0d0d5564b036c7"
-    },
-    {
-      "id": "OZP8126",
-      "image": "data/images/OZP8126.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            530,
-            733,
-            824,
-            828
-          ],
-          "text": "OZP8126",
-          "source_box": [
-            530,
-            733,
-            824,
-            828
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZP8126.jpg",
-      "sha256": "c6b28f2b5f2bb62fc398bb6c3c5b11ca5860a1ef4117285ee5546295b4b20f34"
-    },
-    {
-      "id": "PJJ1406",
-      "image": "data/images/PJJ1406.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            489,
-            594,
-            723,
-            670
-          ],
-          "text": "PJJ1406",
-          "source_box": [
-            489,
-            594,
-            723,
-            670
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJJ1406.jpg",
-      "sha256": "9237d543c83387a755d138a0b83e3f9d60feebe5e89f23250de2c4bdea399221"
-    },
-    {
-      "id": "NTD9247",
-      "image": "data/images/NTD9247.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            677,
-            721,
-            905,
-            795
-          ],
-          "text": "NTD9247",
-          "source_box": [
-            677,
-            721,
-            905,
-            795
-          ]
-        }
-      ],
-      "source": "endtoend/br/NTD9247.jpg",
-      "sha256": "c5e459ca78085cbad96d51ca187f8ffe7d387df3a5fd201cac20d5fbf5578914"
-    },
-    {
-      "id": "ODC9387",
-      "image": "data/images/ODC9387.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            602,
+            397,
+            678,
             709,
-            829,
-            782
+            779
           ],
-          "text": "ODC9387",
+          "text": "PJJ4955",
           "source_box": [
-            602,
+            397,
+            678,
             709,
-            829,
-            782
+            779
           ]
         }
       ],
-      "source": "endtoend/br/ODC9387.jpg",
-      "sha256": "965e433c8de9ddbaa29ca8e8ca2a6fda1e5730de4d759ce6cd511bcf6ca6108d"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "2b3846747cee6eca256868371427ec25be5944199462294944ed74d4e8f89cff"
     },
     {
-      "id": "JGZ3298",
-      "image": "data/images/JGZ3298.jpg",
-      "split": "train",
+      "id": "car_25",
+      "image": "data/images/car_25.png",
+      "source_filename": "endtoend/br/PJI7589.jpg",
+      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
       "format": "br",
+      "split": "test",
+      "annotation_status": "source_annotation",
       "plates": [
         {
           "box": [
-            215,
-            340,
-            1022,
-            602
+            385,
+            688,
+            649,
+            773
           ],
-          "text": "JGZ3298",
+          "text": "PJI7589",
           "source_box": [
-            215,
-            340,
-            1022,
-            602
+            385,
+            688,
+            649,
+            773
           ]
         }
       ],
-      "source": "endtoend/br/JGZ3298.jpg",
-      "sha256": "1f4913185a200bbae67088fb7387396363c5a9fbaaedf5c4c7e8f1592293472d"
-    },
-    {
-      "id": "NTH0518",
-      "image": "data/images/NTH0518.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            395,
-            697,
-            838,
-            840
-          ],
-          "text": "NTH0518",
-          "source_box": [
-            395,
-            697,
-            838,
-            840
-          ]
-        }
-      ],
-      "source": "endtoend/br/NTH0518.jpg",
-      "sha256": "406f6aa5fe3272a4250274712fe0919440410dfa814c693be88bf4867ebdef04"
-    },
-    {
-      "id": "OZR2224",
-      "image": "data/images/OZR2224.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            492,
-            918,
-            844,
-            1032
-          ],
-          "text": "OZR2224",
-          "source_box": [
-            492,
-            918,
-            844,
-            1032
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZR2224.jpg",
-      "sha256": "a1720e2461b803f0c6fd6ca72ff391c8ed19ae2b2508ca5230fdeb309e91a4c4"
-    },
-    {
-      "id": "AZJ6991",
-      "image": "data/images/AZJ6991.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            560,
-            642,
-            796,
-            718
-          ],
-          "text": "AZJ6991",
-          "source_box": [
-            560,
-            642,
-            796,
-            718
-          ]
-        }
-      ],
-      "source": "endtoend/br/AZJ6991.jpg",
-      "sha256": "5fe7e8a9d89a2ee127e752c0ed9b666848819162dcd8a6bd307740c2b3f8d61c"
-    },
-    {
-      "id": "NZO6276",
-      "image": "data/images/NZO6276.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            458,
-            703,
-            717,
-            787
-          ],
-          "text": "NZO6276",
-          "source_box": [
-            458,
-            703,
-            717,
-            787
-          ]
-        }
-      ],
-      "source": "endtoend/br/NZO6276.jpg",
-      "sha256": "b7cc08748b7b26ca04a12a5738805afd1e411f00baff854139478560bceb7535"
-    },
-    {
-      "id": "OZL2318",
-      "image": "data/images/OZL2318.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            592,
-            800,
-            891,
-            897
-          ],
-          "text": "OZL2318",
-          "source_box": [
-            592,
-            800,
-            891,
-            897
-          ]
-        }
-      ],
-      "source": "endtoend/br/OZL2318.jpg",
-      "sha256": "12b01fb5dc968e6e5d7b281188fcb01234e39d63a5b0a7392a54845ae1da9126"
-    },
-    {
-      "id": "OKL1235",
-      "image": "data/images/OKL1235.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            507,
-            446,
-            696,
-            507
-          ],
-          "text": "OKL1235",
-          "source_box": [
-            507,
-            446,
-            696,
-            507
-          ]
-        }
-      ],
-      "source": "endtoend/br/OKL1235.jpg",
-      "sha256": "822d94f23be00a8b9e0660f93beb3cc7ceb94f9af45caf90adf9adedc0700565"
-    },
-    {
-      "id": "PJX5721",
-      "image": "data/images/PJX5721.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            496,
-            482,
-            726,
-            556
-          ],
-          "text": "PJX5721",
-          "source_box": [
-            496,
-            482,
-            726,
-            556
-          ]
-        }
-      ],
-      "source": "endtoend/br/PJX5721.jpg",
-      "sha256": "ff5f9834b9d066b998ea7917c8b8d6fce22bb80db8b154ebae2c93ecdbb5eb9a"
-    },
-    {
-      "id": "OUQ6314",
-      "image": "data/images/OUQ6314.jpg",
-      "split": "train",
-      "format": "br",
-      "plates": [
-        {
-          "box": [
-            495,
-            498,
-            709,
-            567
-          ],
-          "text": "OUQ6314",
-          "source_box": [
-            495,
-            498,
-            709,
-            567
-          ]
-        }
-      ],
-      "source": "endtoend/br/OUQ6314.jpg",
-      "sha256": "6d2c6b3624e7f0d378a411f497f11159ad0772d2081da258ace48e0eaac30c51"
+      "width": 1280,
+      "height": 1280,
+      "sha256": "9aaae884772aeea1afdfd2044010402efc6753ad54005f717f611b6c691fb227"
     }
   ]
 }

@@ -1,11 +1,34 @@
 import argparse
 import json
 import time
+import warnings
 from pathlib import Path
 import cv2
 from plate_pipeline import PlatePipeline
 from plate_pipeline.pipeline import draw_predictions
 from plate_pipeline.parking import ParkingLog
+
+def print_result(source, results, output):
+    line = '=' * 62
+    print(f'\n{line}\n  LICENSE PLATE RECOGNITION\n{line}')
+    print(f'  Image       : {Path(source).name}')
+    print(f'  Plates found: {len(results)}')
+    for index, result in enumerate(results, 1):
+        valid = result['format_valid']
+        status = 'Matches format' if valid is True else 'Check reading' if valid is False else 'Not checked'
+        print(f'\n  PLATE {index}    {result["text"] or "Unreadable"}')
+        print('  ' + '-' * 58)
+        print(f'  Detection   : {result["confidence"]:.1%}')
+        if result.get('ocr_confidence') is not None:
+            print(f'  OCR score   : {result["ocr_confidence"]:.1%}')
+        print(f'  Format      : {status}')
+        print(f'  Box (xyxy)  : {", ".join(str(round(v)) for v in result["box"])}')
+        print(f'  Raw OCR     : {" / ".join(result["raw_text"].split()) or "(empty)"}')
+    if not results:
+        print('\n  No plate detected. Try a clearer or closer image.')
+    print(f'\n  Saved image : {Path(output)}')
+    print('  Scores and format checks do not guarantee a correct reading.')
+    print(line + '\n')
 
 def main():
     p=argparse.ArgumentParser(description='Detect and read every license plate in an image or video.')
@@ -19,7 +42,11 @@ def main():
     p.add_argument('--output',default='prediction.jpg')
     p.add_argument('--db',help='Optional SQLite parking log path')
     p.add_argument('--headless',action='store_true',help='Process a video without opening a window')
+    p.add_argument('--json',action='store_true',help='Print machine-readable JSON instead of the result summary')
     args=p.parse_args()
+    # These CPU/deprecation notices are unrelated to the result; keep other warnings visible.
+    warnings.filterwarnings('ignore', message='.*pin_memory.*no accelerator.*', category=UserWarning)
+    warnings.filterwarnings('ignore', message='torch.quantize_per_tensor, torch.quantize_per_channel.*', category=UserWarning)
     import torch
     torch.set_num_threads(4)
     pipe=PlatePipeline(args.weights,args.ocr,args.format,tesseract_cmd=args.tesseract_cmd)
@@ -27,11 +54,14 @@ def main():
     try:
         if args.image:
             image=pipe.load_image(args.image); results=pipe.predict(image)
-            print(json.dumps(results,indent=2))
             Path(args.output).parent.mkdir(parents=True,exist_ok=True)
             if not cv2.imwrite(args.output,draw_predictions(image,results)):
                 raise RuntimeError('Could not write output image')
             if log: log.record(results,args.image)
+            if args.json:
+                print(json.dumps(results,indent=2))
+            else:
+                print_result(args.image,results,args.output)
             return
         source=int(args.video) if args.video.isdigit() else args.video
         cap=cv2.VideoCapture(source)
@@ -56,7 +86,12 @@ def main():
                 if not args.headless:
                     cv2.imshow('License plates',canvas)
                     if cv2.waitKey(1)&0xff == ord('q'): break
-            print(json.dumps({'frames':count,'processing_fps':count/max(1e-9,time.perf_counter()-start)}))
+            fps=count/max(1e-9,time.perf_counter()-start)
+            if args.json:
+                print(json.dumps({'frames':count,'processing_fps':fps}))
+            else:
+                print(f'\nVIDEO COMPLETE\n  Frames processed : {count}\n  Processing speed : {fps:.2f} FPS')
+                if writer: print(f'  Saved video      : {args.output}')
         finally:
             cap.release()
             if writer: writer.release()

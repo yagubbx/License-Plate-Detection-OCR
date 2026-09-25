@@ -1,42 +1,17 @@
-# Multiple vehicles and difficult inputs
+# Multiple-vehicle crop checks
 
-## Three real scenes
+These three retained images contain neighbouring vehicles as well as the labeled foreground car. They are part of the 25-image evaluation set, not additional dataset images.
 
-These test images contain a foreground vehicle and neighbouring vehicles. The source benchmark labels the foreground plate. The model detected it in each scene. Every saved crop was checked to equal the padded, clipped model box; none uses an annotation as an inference crop.
-
-| Image | Detected text | Full prediction | Model crop |
+| Image | Detected text | Annotated result | Model crop |
 |---|---|---|---|
-| JRK5336 | JRK5336 | [Image](cases/JRK5336.jpg) | [Crop](cases/JRK5336_crop_0.png) |
-| PYB6477 | PYB6477 | [Image](cases/PYB6477.jpg) | [Crop](cases/PYB6477_crop_0.png) |
-| AYO9034 | AYO9034 | [Image](cases/AYO9034.jpg) | [Crop](cases/AYO9034_crop_0.png) |
+| car_19 | JRK5336 | [Result](easyocr/car_19.jpg) | [Crop](easyocr/crops/car_19_0.png) |
+| car_20 | PYB6477 | [Result](easyocr/car_20.jpg) | [Crop](easyocr/crops/car_20_0.png) |
+| car_21 | AYO9034 | [Result](easyocr/car_21.jpg) | [Crop](easyocr/crops/car_21_0.png) |
 
-## Multiple readable plates
+Each foreground plate was correctly read. The evaluator checks every saved model crop for nonempty pixels and the expected padded/clipped bounds. Padding is 8% on each side of the detector box. Annotation coordinates are used only for IoU matching, never for cropping during inference.
 
-Three side-by-side composites check the multi-detection loop more directly. They use held-out source images but are **synthetic checks**, not extra independent test images.
+The supplied car_2 also contains two labeled plates. The foreground plate was found, but the smaller background plate was missed and counts as a false negative. Supporting multiple returned detections does not guarantee that every plate is found.
 
-| Composite | Plates detected | Output |
-|---|---:|---|
-| [1](cases/composite_1.jpg) | 2/2 | JRV1942, PJH0957 |
-| [2](cases/composite_2.jpg) | 2/2 | PJV9741, PJY5472 |
-| [3](cases/composite_3.jpg) | 1/2 | DZK6717 |
+Unit tests also cover separate crops from multiple boxes, boundary clipping, no detections and duplicate matching. The video loop supports webcam input and video files; processing speed depends on the machine. No physical webcam was tested.
 
-The third composite fails: PJB7392 is missed and OZK6717 is read as DZK6717. Resizing two scenes into one reduces plate size. The code handles every returned box, but this small model does not detect every plate in every scene.
-
-## Controlled stress checks
-
-| Input | Detections | OCR result | Interpretation |
-|---|---:|---|---|
-| [Blur](cases/blur.jpg) | 1 | ET | Found the region; text unreadable and format invalid |
-| [20-degree angle](cases/angle.jpg) | 1 | JRV1942 | Correct reading despite rotation |
-| [Partial occlusion](cases/occlusion.jpg) | 0 | empty list | Detector misses the masked plate; no invented OCR result |
-| [No plate](cases/no_plate.jpg) | 0 | empty list | No crash and no false plate on this uniform input |
-
-These transformations are applied to JRV1942 and are excluded from headline metrics. Ground-truth coordinates are used only to place the synthetic occlusion, never to supply a detection or OCR crop. The uniform negative is a smoke test, not a representative negative-image benchmark.
-
-## Video and parking log
-
-The actual video command processed all 9 frames of [this generated test clip](cases/smoke_input.mp4) and wrote [the annotated output](cases/smoke_output.mp4). Processing speed on the test CPU was **2.37 FPS**. This confirms the video path; it is not evidence of full-frame-rate webcam performance. A physical webcam was not tested.
-
-The same run wrote three unique UTC-timestamped entries: JRV1942, PJH0957 and JRK5336. Consecutive repeats were suppressed. [Recorded log rows](cases/parking_log.csv) show the actual database output.
-
-Reproduce the checks with `python check_cases.py`. All case predictions are stored in [checks.json](cases/checks.json).
+The updated video command was checked on a temporary nine-frame clip made from car_19, car_22 and car_23. All nine output frames were written at 2.64 processing FPS on the test CPU. SQLite recorded JRK5336, JRV1942 and PJH0957 once each, suppressing consecutive repeats. The temporary clip is not an additional dataset image or a shipped asset.

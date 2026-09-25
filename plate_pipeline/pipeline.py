@@ -14,7 +14,7 @@ class PlatePipeline:
                  padding=0.08, tesseract_cmd=None, model_dir='models/ocr'):
         from ultralytics import YOLO
         if not Path(weights).is_file():
-            raise FileNotFoundError(f'Missing detector: {weights}. See README training instructions.')
+            raise FileNotFoundError(f'Missing detector: {weights}. Restore models/plate.pt from the project archive.')
         if not 0 <= confidence <= 1:
             raise ValueError('confidence must be between 0 and 1')
         clean_text('', plate_format)

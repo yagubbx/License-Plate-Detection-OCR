@@ -1,102 +1,67 @@
-# License plate detection and OCR
+# License Plate Detection & OCR
 
-Give the program a vehicle image. YOLOv8 finds the plates, OpenCV crops each box with 8% padding, and OCR reads the text. All crops come from model predictions. No coordinates or answers are supplied during inference.
+YOLOv8 finds a plate, OpenCV crops it with padding, and EasyOCR reads the text. Detection boxes always come from the model.
 
 ## Run
 
-Use Python 3.11. Run these commands from this folder:
+Use Python 3.11. Open a terminal in this folder:
 
-```bash
+```powershell
 python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-python run.py --image data/images/JRV1942.jpg --format br
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe run.py --image data/images/car_1.png --format az
 ```
 
-The command prints the boxes, raw OCR text and cleaned text, and saves `prediction.jpg`. EasyOCR downloads its English models on first use. The trained detector is included in `models/plate.pt`.
+The terminal shows a result card with the plate text, detection score, raw OCR, format status and saved image path. The annotated image is saved as `prediction.jpg`. Use `--output result.png` to choose another output. Add `--json` if another program needs JSON.
 
-On Linux/macOS, activate the environment with `source .venv/bin/activate` instead.
+The detector is included. EasyOCR downloads its English weights on first use. No retraining is needed.
 
-For an unseen Azerbaijani plate:
+## The 25 images
 
-```bash
-python run.py --image car.jpg --format az
+- `car_1.png`–`car_18.png`: the supplied Azerbaijani photos; use `--format az`.
+- `car_19.png`–`car_25.png`: seven retained Brazilian photos; use `--format br`.
+
+All are real PNG files. The filename is never used to infer the plate number. `data/manifest.json` records paths, original filenames, dimensions, checksums, plate strings and evaluation boxes. The 18 supplied photos were visually annotated before inference; the seven retained photos preserve their source annotations. There are 26 labeled plates because `car_2` also has a legible background plate.
+
+These 25 images are test-only. The detector was previously fine-tuned from COCO YOLOv8n on 74 different Brazilian images, with checkpoint selection on a separate 10-image validation set. That old dataset is not included. The model has not been fine-tuned on the supplied Azerbaijani photos. The annotated boxes are used only for evaluation, never for inference cropping.
+
+## Evaluation
+
+```powershell
+.\.venv\Scripts\python.exe evaluate.py --engines easyocr
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-`az` checks the ordinary `12-AB-345` format; `br` checks the older Brazilian `ABC-1234` format used in the test data. Spaces and punctuation are removed. Confusable characters such as `O/0` and `I/1` are corrected only at the expected letter/digit positions. Other countries can use `--format generic`. Validation checks the shape of the string, not whether a plate was officially issued.
+[Results](reports/results.md) · [Failure examples](reports/failures.md) · [Multiple-vehicle checks](reports/cases.md)
 
-EasyOCR's smaller state/dealer text regions are excluded from the number candidate. The complete raw text is still saved. Ambiguous or missing characters are not filled from a list of known answers.
+To compare both OCR engines on identical model crops, install [Tesseract for Windows](https://github.com/UB-Mannheim/tesseract/wiki), then run:
+
+```powershell
+.\.venv\Scripts\python.exe evaluate.py --tesseract-cmd "C:\Program Files\Tesseract-OCR\tesseract.exe"
+```
+
+EasyOCR is the pip-only option. During development, the Tesseract installer did not launch in the restricted Windows environment; its files were extracted locally and the executable path was passed explicitly.
+
+## Bonuses
+
+```powershell
+# Webcam: live boxes; q closes the window
+.\.venv\Scripts\python.exe run.py --video 0 --format az --db parking.sqlite3
+
+# Video file
+.\.venv\Scripts\python.exe run.py --video drive.mp4 --format az --output annotated.mp4 --headless
+```
+
+The SQLite log records plate, UTC timestamp, source, box and detection score. Empty/invalid readings are skipped; repeated plates from the same source have a 30-second cooldown. Live processing speed depends on hardware.
+
+Regex validation supports ordinary Azerbaijani `12-AB-345` and older Brazilian `ABC-1234` formats. Position-based `O/0`, `I/1` and similar corrections remove common OCR noise. `--format generic` disables country-specific correction. A valid format or high model score does not prove the reading is correct.
 
 Python use:
 
 ```python
 from plate_pipeline import PlatePipeline
-
 pipeline = PlatePipeline(plate_format="az")
-texts = pipeline("car.jpg")  # one string per detection; [] if none
-details = pipeline.predict("car.jpg")  # boxes, raw text and confidence
+texts = pipeline("data/images/car_1.png")  # [] if nothing is detected
 ```
 
-## Results
-
-On 30 held-out images: mean IoU **0.846**, detection precision/recall at IoU 0.5 **100%/100%**, EasyOCR exact match **23/30 (76.7%)**, CER **7.14%**. These figures describe this small Brazilian test set, not every country or road condition.
-
-See [test results](reports/results.md), [failure examples](reports/failures.md) and [multiple-vehicle checks](reports/cases.md). The CSV reports contain one row per ground-truth plate plus any extra detections.
-
-Re-run the same comparison:
-
-```bash
-python evaluate.py
-```
-
-Tesseract is required for the comparison. Install the [Windows build](https://github.com/UB-Mannheim/tesseract/wiki), then pass its executable if it is not on PATH:
-
-```bash
-python evaluate.py --tesseract-cmd "C:\Program Files\Tesseract-OCR\tesseract.exe"
-```
-
-To evaluate only EasyOCR, use `python evaluate.py --engines easyocr`.
-
-## Bonuses
-
-```bash
-# Webcam; press q to close
-python run.py --video 0 --format az --db parking.sqlite3
-
-# Dashcam file; save boxes and plate text in an output video
-python run.py --video drive.mp4 --format az --output annotated.mp4 --headless
-
-# Record an image result with a UTC timestamp
-python run.py --image car.jpg --format az --db parking.sqlite3
-```
-
-The SQLite `sightings` table stores timestamp, source, plate, box and confidence. Invalid or empty strings are skipped; repeats from the same source have a 30-second cooldown. The live loop displays its measured processing FPS. Speed depends on the CPU and the number of plates.
-
-## Data and training
-
-The [OpenALPR benchmark](https://github.com/openalpr/benchmarks) supplies the image annotations: pixel boxes and plate strings. These are the source dataset's labels, not newly claimed personal annotations. The 114 Brazilian images are split by a fixed hash of their filenames: 74 train, 10 validation, 30 test. Plate identities and file checksums are checked for overlap. The exact upstream revision, original coordinates and image hashes are in `data/manifest.json`.
-
-One source training box starts at x = -1 (`PJT2905`); its working coordinate is clipped to zero. The original is retained as `source_box`. Test annotations were visually checked; no model outputs were used to create them.
-
-YOLOv8n starts from COCO weights and is fine-tuned for one class, `license_plate`, at image size 416. It is small enough to run on CPU. Checkpoint selection uses validation data, not the test set. The ordinary COCO detector is not used as a plate detector.
-
-To train again:
-
-```bash
-python train.py --epochs 25
-```
-
-Use `--serial-scan` if Windows blocks named pipes during label scanning. YOLO label files are generated from the manifest, so the pixel-to-normalized-coordinate conversion is reproducible. Training history is saved in `reports/training/`.
-
-## Checks and limits
-
-```bash
-python -m pytest -q
-python check_cases.py
-```
-
-The detector was trained on a small Brazilian dataset. Azerbaijani format cleaning is implemented, but accuracy on Azerbaijani roads is not measured. Blur, strong angles and occlusion can still make text unreadable. Invalid OCR output is returned visibly rather than replaced with a guessed plate. The failure report shows actual errors.
-
-On this Windows machine, the Tesseract installer did not launch. Its files were extracted locally and its executable was passed explicitly. EasyOCR was the pip-only alternative. No system-wide PATH changes are necessary.
-
-References: [Ultralytics training](https://docs.ultralytics.com/modes/train/), [EasyOCR](https://github.com/JaidedAI/EasyOCR), [Tesseract](https://tesseract-ocr.github.io/tessdoc/Installation.html). Upstream dataset licensing is included in `data/LICENSE`; the project uses AGPL-3.0.
+Sources: [Ultralytics](https://docs.ultralytics.com/modes/train/), [EasyOCR](https://github.com/JaidedAI/EasyOCR), [OpenALPR source images](https://github.com/openalpr/benchmarks). The source license for the seven retained images is in `data/SOURCE_LICENSE`. Supplied photos retain their original rights. Project code uses AGPL-3.0.

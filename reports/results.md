@@ -1,11 +1,11 @@
 # Test results
 
-30 held-out images. All prediction boxes come from the trained model.
+25 held-out images. All prediction boxes come from the trained model.
 
 | OCR | Mean IoU (all GT) | Precision@.5 | Recall@.5 | Exact match | CER | Image accuracy |
 |---|---:|---:|---:|---:|---:|---:|
-| easyocr | 0.8457 | 100.00% | 100.00% | 76.67% | 0.0714 | 76.67% |
-| tesseract | 0.8457 | 100.00% | 100.00% | 3.33% | 0.8476 | 3.33% |
+| easyocr | 0.6320 | 100.00% | 76.92% | 46.15% | 0.3791 | 44.00% |
+| tesseract | 0.6320 | 100.00% | 76.92% | 7.69% | 0.7527 | 4.00% |
 
 Mean IoU uses confidence-ordered, one-to-one positive-overlap matching. Unmatched ground-truth plates contribute zero. Detection precision/recall and end-to-end accuracy require IoU >= 0.5.
 

@@ -73,7 +73,11 @@ def main():
     import torch
     torch.set_num_threads(4)
     records=[r for r in json.loads(Path(args.manifest).read_text())['images'] if r['split']=='test']
-    if len(records)<20: raise ValueError('Need at least 20 held-out test images')
+    if len(records)<20: raise ValueError('Need at least 20 labeled held-out test images.')
+    for record in records:
+        if record.get('plates') is None: raise ValueError(f'Missing ground truth: {record["image"]}')
+        if hashlib.sha256(Path(record['image']).read_bytes()).hexdigest()!=record['sha256']:
+            raise ValueError(f'Image changed since annotation: {record["image"]}')
     out=Path(args.output); out.mkdir(parents=True,exist_ok=True)
     pipe=PlatePipeline(args.weights,args.engines[0],plate_format='br',tesseract_cmd=args.tesseract_cmd)
     images=[pipe.load_image(r['image']) for r in records]
@@ -82,16 +86,19 @@ def main():
     for engine in args.engines:
         if engine != args.engines[0]: pipe.ocr=OCR(engine,tesseract_cmd=args.tesseract_cmd)
         predictions=[]; start=time.perf_counter()
-        cropdir=out/engine/'crops'; cropdir.mkdir(parents=True,exist_ok=True)
+        cropdir=out/engine/'crops'
+        if engine==args.engines[0]: cropdir.mkdir(parents=True,exist_ok=True)
         for record,image,boxes in zip(records,images,detections):
             pipe.plate_format=record['format']
             preds=[pipe.recognize(image,d) for d in boxes]
             predictions.append(preds)
-            cv2.imwrite(str(out/engine/(record['id']+'.jpg')),draw_predictions(image,preds))
+            if engine==args.engines[0]:
+                cv2.imwrite(str(out/engine/(record['id']+'.jpg')),draw_predictions(image,preds))
             for k,pred in enumerate(preds):
                 crop,bounds=padded_crop(image,pred['box'],pipe.padding)
                 assert bounds==pred['crop_box'] and crop.size
-                cv2.imwrite(str(cropdir/(record['id']+f'_{k}.png')),crop)
+                if engine==args.engines[0]:
+                    cv2.imwrite(str(cropdir/(record['id']+f'_{k}.png')),crop)
             print(engine,record['id'],[p['text'] for p in preds],flush=True)
         metrics,rows=summarize(records,predictions)
         metrics['ocr_seconds']=time.perf_counter()-start

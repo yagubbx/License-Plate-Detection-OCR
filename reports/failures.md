@@ -1,35 +1,23 @@
-# Failure analysis
+# Failure examples
 
-EasyOCR read 23 of 30 test plates exactly. All 30 model boxes passed IoU 0.5, so the seven end-to-end errors came from recognition. These are three of the actual test failures; the explanations below are based on visual inspection, not a claim to know the model's internal cause.
+The current set contains 25 images and 26 labeled plates. Detection found 20 plates at IoU >= 0.5. EasyOCR read 12 exactly. The detector was trained on different Brazilian images, so the Azerbaijani photos expose a change in plate shape, scene composition and lighting. The explanations below are based on visual inspection.
 
-## Dark plate: PJJ4955
+## car_5: detector miss
 
-![Model crop of PJJ4955](easyocr/crops/PJJ4955_0.png)
+![Angled car with missed plate](easyocr/car_5.jpg)
 
-Expected `PJJ4955`; returned `PJJ7955`. IoU: **0.873**. The crop includes the whole plate, but the image is dark and the `4` was read as `7`. This is a digit-to-digit error, so the letter/digit correction cannot fix it. The result passes the format regex and is still wrong.
+The foreground plate is `99FT099`, but no box was returned. It is angled and occupies a small part of the scene. The detector missed it, so OCR was not called. Manually supplying the known annotation as a crop would hide the detection failure; the pipeline does not do that.
 
-[Full prediction](easyocr/PJJ4955.jpg)
+## car_11: night-time OCR error
 
-## Angled plate: JPQ9870
+![Model crop at night](easyocr/crops/car_11_0.png)
 
-![Model crop of JPQ9870](easyocr/crops/JPQ9870_0.png)
+The expected text is `10RC110`; the cleaned result is `NRCM`. The model located a plate, but the night-time crop has strong illumination differences and the OCR reading lost several characters. It fails the format check. A regex cannot reconstruct the missing text.
 
-Expected `JPQ9870`; returned `JPO3870`. IoU: **0.792**. The plate is tilted; OCR confused `Q` with `O` and `9` with `3`. Padding preserved the corners but did not straighten the plate. Rotation augmentation helps detection; it does not guarantee correct character recognition.
+## car_25: blur and reflections
 
-[Full prediction](easyocr/JPQ9870.jpg)
+![Soft reflective model crop](easyocr/crops/car_25_0.png)
 
-## Blur and reflections: PJI7589
+Expected `PJI7589`; returned `PJ7533`. The crop includes the plate, but soft detail and reflections make characters hard to separate. The six-character reading is flagged invalid. The model result is retained rather than replaced with the annotation.
 
-![Model crop of PJI7589](easyocr/crops/PJI7589_0.png)
-
-Expected `PJI7589`; returned `PJ7533`. IoU: **0.798**. The crop is soft and reflective. OCR dropped a character and confused the last digits. The six-character result is flagged invalid. The pipeline returns the observed result rather than filling in missing characters from the test labels.
-
-[Full prediction](easyocr/PJI7589.jpg)
-
-## Controlled difficult inputs
-
-The [case checks](cases.md) also apply blur, a 20-degree rotation, and a partial mask to a test image. These modified images are explicitly synthetic stress checks and are excluded from the 30-image accuracy report. With partial occlusion, the detector returned no boxes, so OCR was not called.
-
-## Tesseract comparison
-
-Tesseract 5.4.0 with English, OEM 3 and PSM 7 read **1/30** plates exactly on the identical model crops; EasyOCR read **23/30**. PSM 7 treats the input as one text line, while these plates also contain small state labels, borders and bolts. Several crops produced empty output. This is a fixed baseline comparison, not a general claim that Tesseract cannot read plates. Its settings were not tuned on the held-out test set. EasyOCR is the default used by the program.
+All per-plate outcomes, including missed plates, are in [easyocr.csv](easyocr.csv). [tesseract.csv](tesseract.csv) contains the comparison on identical detector crops. These are the current 25-image results; no scores from the removed dataset are carried forward.

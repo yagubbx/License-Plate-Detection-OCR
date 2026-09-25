@@ -3,12 +3,9 @@ __pycache__/
 .pytest_cache/
 .cache/
 Ultralytics/
-data/yolo/
-data/plates.yaml
-yolov8n.pt
 *.sqlite3
 *.sqlite3-*
 runs/
 models/ocr/
 *.mp4
-!reports/cases/*.mp4
+prediction.jpg
