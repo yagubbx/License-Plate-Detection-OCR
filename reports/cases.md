@@ -1,17 +1,43 @@
-# Multiple-vehicle crop checks
+# Crop and layout checks
 
-These three retained images contain neighbouring vehicles as well as the labeled foreground car. They are part of the 25-image evaluation set, not additional dataset images.
+## Multiple vehicles
 
-| Image | Detected text | Annotated result | Model crop |
-|---|---|---|---|
-| car_19 | JRK5336 | [Result](easyocr/car_19.jpg) | [Crop](easyocr/crops/car_19_0.png) |
-| car_20 | PYB6477 | [Result](easyocr/car_20.jpg) | [Crop](easyocr/crops/car_20_0.png) |
-| car_21 | AYO9034 | [Result](easyocr/car_21.jpg) | [Crop](easyocr/crops/car_21_0.png) |
+Three real photographs with multiple vehicles were checked. Every crop below uses a YOLO box with 8% padding, clipped to image bounds. Saved pixels were compared with the corresponding slice of the source image. All seven crops matched.
 
-Each foreground plate was correctly read. The evaluator checks every saved model crop for nonempty pixels and the expected padded/clipped bounds. Padding is 8% on each side of the detector box. Annotation coordinates are used only for IoU matching, never for cropping during inference.
+| Image | Split | Model detections | Crops checked |
+|---|---|---:|---:|
+| car_5 | development | 2 | 2 |
+| car_23 | development | 2 | 2 |
+| car_25 | test | 3 | 3 |
 
-The supplied car_2 also contains two labeled plates. The foreground plate was found, but the smaller background plate was missed and counts as a false negative. Supporting multiple returned detections does not guarantee that every plate is found.
+The count is the number of detections, not the number of successfully read plates. Some background plates are too small, cropped by the image edge or missed entirely.
 
-Unit tests also cover separate crops from multiple boxes, boundary clipping, no detections and duplicate matching. The video loop supports webcam input and video files; processing speed depends on the machine. No physical webcam was tested.
+car_5, main and background:
 
-The updated video command was checked on a temporary nine-frame clip made from car_19, car_22 and car_23. All nine output frames were written at 2.64 processing FPS on the test CPU. SQLite recorded JRK5336, JRV1942 and PJH0957 once each, suppressing consecutive repeats. The temporary clip is not an additional dataset image or a shipped asset.
+![Main plate](examples/car_5_0.png)
+![Background plate](examples/car_5_1.png)
+
+car_23, main and background:
+
+![Main plate](examples/car_23_0.png)
+![Background plate](examples/car_23_1.png)
+
+car_25, main and two partial background plates:
+
+![Main plate](examples/car_25_0.png)
+![Partial plate](examples/car_25_1.png)
+![Partial plate](examples/car_25_2.png)
+
+## Two-line OCR
+
+The supplied photos have single-line primary plates. These three synthetic crops check row ordering and the OCR hand-off only; they do not measure the detector on real two-line vehicle photographs and are excluded from all reported dataset accuracy.
+
+| Top / bottom | OCR result | Correct |
+|---|---|---|
+| 12 / AB345 | 12AB345 | yes |
+| 90 / XY678 | 90XY678 | yes |
+| 77 / RZ144 | 77RZ144 | yes |
+
+![Synthetic two-line crop](examples/two_line_12AB345.png)
+
+Structured results are in [crop_checks.json](crop_checks.json). Unit tests additionally cover row ordering, clipped boxes, no detections, ambiguous text, missing characters, metric denominators and parking-log deduplication.

@@ -2,6 +2,8 @@ import argparse
 import json
 import time
 import warnings
+import sys
+from contextlib import redirect_stdout
 from pathlib import Path
 import cv2
 from plate_pipeline import PlatePipeline
@@ -16,7 +18,7 @@ def print_result(source, results, output):
     for index, result in enumerate(results, 1):
         valid = result['format_valid']
         status = 'Matches format' if valid is True else 'Check reading' if valid is False else 'Not checked'
-        print(f'\n  PLATE {index}    {result["text"] or "Unreadable"}')
+        print(f'\n  PLATE {index}    {result.get("display_text",result["text"]) or "Unreadable"}')
         print('  ' + '-' * 58)
         print(f'  Detection   : {result["confidence"]:.1%}')
         if result.get('ocr_confidence') is not None:
@@ -49,7 +51,8 @@ def main():
     warnings.filterwarnings('ignore', message='torch.quantize_per_tensor, torch.quantize_per_channel.*', category=UserWarning)
     import torch
     torch.set_num_threads(4)
-    pipe=PlatePipeline(args.weights,args.ocr,args.format,tesseract_cmd=args.tesseract_cmd)
+    with redirect_stdout(sys.stderr):
+        pipe=PlatePipeline(args.weights,args.ocr,args.format,tesseract_cmd=args.tesseract_cmd)
     log=ParkingLog(args.db) if args.db else None
     try:
         if args.image:

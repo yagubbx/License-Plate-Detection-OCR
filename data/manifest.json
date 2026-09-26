@@ -1,15 +1,42 @@
 {
-  "description": "25-image held-out evaluation set: 18 supplied Azerbaijani images and 7 retained Brazilian images.",
-  "annotation_notes": "The 18 supplied images were visually annotated independently of detector output. The 7 retained images preserve source labels. Foreground plates and the legible background plate in car_2 are labeled; tiny unreadable background plates are outside the OCR transcription scope. Unmatched predictions still count as false positives.",
-  "model_note": "The detector was previously fine-tuned on 74 different Brazilian images. None of these 25 test images was used for that fine-tuning. No tuning was performed on the supplied images.",
+  "description": "58 user-supplied vehicle photos. Manual axis-aligned boxes and visual transcriptions.",
+  "split_policy": "Seed 20260926, shuffled plate-identity groups. Previously evaluated images restricted to development. Split frozen before OCR tuning. No fine-tuning on these photos.",
+  "annotation_policy": "All primary plates and identifiable background plates annotated. Null text means unreadable/partial; evaluated for detection only. Distant plates smaller than 25x8 pixels excluded. Predictions below the same size are excluded from evaluation only.",
   "images": [
     {
       "id": "car_1",
+      "source": "pictures/#avtosh #azelow #vaz2106 #bakinski #peredok_.jpg",
+      "width": 735,
+      "height": 948,
+      "pixel_sha256": "54247d5e72424bd36aff2fb1ab8ff19f36d84d25b9c0196cf000b7548c6c9674",
+      "sha256": "62720861c4b04aef2957dbe8afb15f887fcf1ccf8e7fb30170b346c504d48c97",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90BG028",
+          "box": [
+            454,
+            696,
+            583,
+            741
+          ],
+          "primary": true
+        }
+      ],
       "image": "data/images/car_1.png",
-      "source_filename": "pictures/001 efirdi).jpg",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "90BG028",
+      "split": "development"
+    },
+    {
+      "id": "car_2",
+      "source": "pictures/001 efirdi).jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "e9a374e59e9b326764e27fde78e7e2c1991687832a90c93e6a02aecc48d986f4",
+      "sha256": "79230883d9ef9a5d32664fe60e228ad3653d6df2e672ffdc15d081c82e890422",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -18,20 +45,76 @@
             571,
             828
           ],
-          "text": "01MH001"
+          "text": "01MH001",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 981,
-      "sha256": "79230883d9ef9a5d32664fe60e228ad3653d6df2e672ffdc15d081c82e890422"
+      "image": "data/images/car_2.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "01MH001",
+      "split": "development"
     },
     {
-      "id": "car_2",
-      "image": "data/images/car_2.png",
-      "source_filename": "pictures/10 NM 011.jpg",
+      "id": "car_3",
+      "source": "pictures/012.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "3cfb5fa407e5c6c035030e4f6f804c2b9c435825572695d4e62cafb48e7549f3",
+      "sha256": "bc9efe70ed97a73ec0666cdfe9cad498ba9ca18a12655f84a48553b09dd95fd3",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90OT012",
+          "box": [
+            300,
+            569,
+            495,
+            619
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_3.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "90OT012",
+      "split": "test"
+    },
+    {
+      "id": "car_4",
+      "source": "pictures/10 EF 333.jpg",
+      "width": 736,
+      "height": 975,
+      "pixel_sha256": "84e7a6ccdbe15aae684ff3e99225ea352c6f985d4711f519ad2328adf649a7a3",
+      "sha256": "b15d28c53614295e126f9423d45fa16c637b162b17d87afcdcfd736421d42ad0",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "10EF333",
+          "box": [
+            438,
+            717,
+            546,
+            768
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_4.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10EF333",
+      "split": "development"
+    },
+    {
+      "id": "car_5",
+      "source": "pictures/10 NM 011.jpg",
+      "width": 736,
+      "height": 1081,
+      "pixel_sha256": "707659bd6ad971ea9b30f9b6df70ded2c0ba6fc677c952e534be5f4363aed30d",
+      "sha256": "c94ddede18fca338286a7a4033ecb3781f651964c4578efc5259ef1337fb1add",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -40,7 +123,8 @@
             433,
             907
           ],
-          "text": "10NM011"
+          "text": "10NM011",
+          "primary": true
         },
         {
           "box": [
@@ -49,20 +133,206 @@
             111,
             571
           ],
-          "text": "20DE200"
+          "text": "20DE200",
+          "primary": false
         }
       ],
-      "width": 736,
-      "height": 1081,
-      "sha256": "c94ddede18fca338286a7a4033ecb3781f651964c4578efc5259ef1337fb1add"
+      "image": "data/images/car_5.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10NM011",
+      "split": "development"
     },
     {
-      "id": "car_3",
-      "image": "data/images/car_3.png",
-      "source_filename": "pictures/60 CA 006.jpg",
+      "id": "car_6",
+      "source": "pictures/10 OO 808.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "9bb7d763245c5ebb679b25d988c3cbfd016a60666aaed48521bf9d1c00b8c547",
+      "sha256": "cd1c5f2342c2c0303f2df51f61e38993777737e39888d49c09058f99b2cec1ba",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "10OO808",
+          "box": [
+            293,
+            736,
+            466,
+            781
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_6.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "10OO808",
+      "split": "development"
+    },
+    {
+      "id": "car_7",
+      "source": "pictures/10-HF-739.jpg",
+      "width": 736,
+      "height": 1308,
+      "pixel_sha256": "026379a0411fc05150fccc631bd3850c3c63e490ef841c671fadad06edcc5338",
+      "sha256": "86e97d10be013c6454a935b28d8e118bb0bc0bab42a34c1a4b4e04c0c9b0dcbf",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "10HF739",
+          "box": [
+            261,
+            765,
+            393,
+            804
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_7.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10HF739",
+      "split": "development"
+    },
+    {
+      "id": "car_8",
+      "source": "pictures/20 CA 002.jpg",
+      "width": 736,
+      "height": 1308,
+      "pixel_sha256": "ff026e7b8be961e27c87f25790d665d381dc4c6bdf8390c3353ca5e1aaa1c4d3",
+      "sha256": "7b232ee38f1ca0026dc4e46ea3a5a50cf5618b506540280e311a521229c9a7fd",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "20CA002",
+          "box": [
+            438,
+            831,
+            560,
+            874
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_8.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "20CA002",
+      "split": "development"
+    },
+    {
+      "id": "car_9",
+      "source": "pictures/20 CT 700.jpg",
+      "width": 736,
+      "height": 974,
+      "pixel_sha256": "99f5093dd05ccadb05d67c43edc40f21aa13cae8268a5c123f8d055bd8c3cd7e",
+      "sha256": "623903b215b5dec7448344bbe70366c9cb33a46e78e84ce270992dc02f27dbc8",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "20CT700",
+          "box": [
+            208,
+            749,
+            342,
+            781
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_9.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "20CT700",
+      "split": "test"
+    },
+    {
+      "id": "car_10",
+      "source": "pictures/33 AA 333.jpg",
+      "width": 735,
+      "height": 727,
+      "pixel_sha256": "7dd543b778cc0fc0b5f96c11509df5c34cb32240b24293bbc2c45f28449b815f",
+      "sha256": "3150a59666cfb09a7c4c6ef328fcae8190c09f923900d89099fb7c5610533a4c",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "33AA333",
+          "box": [
+            176,
+            516,
+            357,
+            561
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_10.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "33AA333",
+      "split": "development"
+    },
+    {
+      "id": "car_11",
+      "source": "pictures/44 ZZ 444.jpg",
+      "width": 720,
+      "height": 720,
+      "pixel_sha256": "ec9238952c52aae0e819c6803a5abd6f786c6a6d0386e28f7e8f6ca4f2779d2a",
+      "sha256": "d2348c52718df09d5d642d58756cd1a1723388e0feec853977ec62ef052a69f7",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "44ZZ444",
+          "box": [
+            272,
+            526,
+            439,
+            565
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_11.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "44ZZ444",
+      "split": "development"
+    },
+    {
+      "id": "car_12",
+      "source": "pictures/55 CE 155.jpg",
+      "width": 736,
+      "height": 977,
+      "pixel_sha256": "380f6ef7f6a6bfe0f7b47bd4778922dc82a0fb21d7197439989d371b6d5f19a6",
+      "sha256": "8e28d87205f909431c096059e2cd4a8289f76bd00d84ea5ea590bd7eabb3d1c9",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "55CE155",
+          "box": [
+            138,
+            640,
+            242,
+            685
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_12.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "55CE155",
+      "split": "test"
+    },
+    {
+      "id": "car_13",
+      "source": "pictures/60 CA 006.jpg",
+      "width": 736,
+      "height": 920,
+      "pixel_sha256": "360521a15d4ed1bfb28b5e8dc2126f71cc6f5112265ec90ca42094d4daf10b9f",
+      "sha256": "ff66e834c5f6b6ef9fb9c9b5eced053d219feeae8de54303c5f8d13cf88eb303",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -71,20 +341,76 @@
             287,
             691
           ],
-          "text": "60CA006"
+          "text": "60CA006",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 920,
-      "sha256": "ff66e834c5f6b6ef9fb9c9b5eced053d219feeae8de54303c5f8d13cf88eb303"
+      "image": "data/images/car_13.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "60CA006",
+      "split": "development"
     },
     {
-      "id": "car_4",
-      "image": "data/images/car_4.png",
-      "source_filename": "pictures/90 DC 004.jpg",
+      "id": "car_14",
+      "source": "pictures/63 LL 063.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "74f4e946a3fab25cbf226bfe0d0478686843d8001014b7a79ea35df35f63f1e4",
+      "sha256": "2b4c8592833e65c5ff680af2d57841dad160a79eff3c6d65914219552bf02d0d",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "63LL063",
+          "box": [
+            265,
+            781,
+            452,
+            823
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_14.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "63LL063",
+      "split": "development"
+    },
+    {
+      "id": "car_15",
+      "source": "pictures/77 AJ 460.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "72a307d129861d2d20e90007f741cd0cab2cd03d72ad848023e160b2012d509b",
+      "sha256": "6eb51a9966afaab5a40b7cff74dfaee0efb2860cf91fd7d36e46238441eaf030",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77AJ460",
+          "box": [
+            401,
+            547,
+            549,
+            594
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_15.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77AJ460",
+      "split": "test"
+    },
+    {
+      "id": "car_16",
+      "source": "pictures/90 DC 004.jpg",
+      "width": 736,
+      "height": 969,
+      "pixel_sha256": "a42fdad9874d6d8531258159767cc32fc589a2381e21d9a93acbdcb0b358baf8",
+      "sha256": "8001232222aa9fc4f74478f62f9ea96ec7302873da31ddd1f77c6363407cf4fb",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -93,20 +419,190 @@
             566,
             758
           ],
-          "text": "90DC004"
+          "text": "90DC004",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 969,
-      "sha256": "8001232222aa9fc4f74478f62f9ea96ec7302873da31ddd1f77c6363407cf4fb"
+      "image": "data/images/car_16.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90DC004",
+      "split": "development"
     },
     {
-      "id": "car_5",
-      "image": "data/images/car_5.png",
-      "source_filename": "pictures/911.jpg",
+      "id": "car_17",
+      "source": "pictures/90 PU 029.jpg",
+      "width": 735,
+      "height": 973,
+      "pixel_sha256": "0a198d745fe6c5f7f06fffce81e4859fce4a5143d8ca6ea204db4f04e71a03d2",
+      "sha256": "56e55a16dfc8c634e280c56d1c1920df0f0b22e9ab34221780b5dabc8179dbc6",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90PU029",
+          "box": [
+            394,
+            675,
+            556,
+            721
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_17.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "90PU029",
+      "split": "test"
+    },
+    {
+      "id": "car_18",
+      "source": "pictures/90 UN 023.jpg",
+      "width": 736,
+      "height": 946,
+      "pixel_sha256": "5a1d1a57b6e2563fb7f5651d41d1c615487c68b473f0741781f48a7e88282948",
+      "sha256": "d06231e3fa321fcae90454dd9a406b4d9442133ba6bfc0dd7f907a5c061a34a2",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90UN023",
+          "box": [
+            469,
+            850,
+            596,
+            896
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_18.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90UN023",
+      "split": "test"
+    },
+    {
+      "id": "car_19",
+      "source": "pictures/90 VA 109.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "fd16850d155ea6676344bfb26dbe2cd0a2fe60f28f4b1d0fd5e07c02359e06ab",
+      "sha256": "20c2347ef2014205ce1c127f94c7ad1d1e6f25f8b72fc83d425fce5264b269ef",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99VA109",
+          "box": [
+            184,
+            697,
+            334,
+            749
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_19.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99VA109",
+      "split": "development"
+    },
+    {
+      "id": "car_20",
+      "source": "pictures/90 YG 203.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "45c694f2d684bda56090f499521cde4bfb58086aaebd56d962489cb2055d8e11",
+      "sha256": "7d957b7d44bbcf0c5999adc20f867753cd05ed5b0ccec561f2611672f338f622",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90YG203",
+          "box": [
+            411,
+            674,
+            574,
+            750
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_20.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90YG203",
+      "split": "development"
+    },
+    {
+      "id": "car_21",
+      "source": "pictures/90 YM 464.jpg",
+      "width": 736,
+      "height": 1308,
+      "pixel_sha256": "e93f01cd497d3d7d70f12de816d2362ee08eb6a4654529e8ea3dd2618627bb64",
+      "sha256": "f062edd6f584b83fb31a158b999a0099e9f38b7cc75ef0c71d516f1486d242c6",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90YM464",
+          "box": [
+            287,
+            781,
+            449,
+            815
+          ],
+          "primary": true
+        },
+        {
+          "box": [
+            52,
+            617,
+            83,
+            626
+          ],
+          "text": null,
+          "primary": false
+        }
+      ],
+      "image": "data/images/car_21.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90YM464",
+      "split": "development"
+    },
+    {
+      "id": "car_22",
+      "source": "pictures/90 ZC 025.jpg",
+      "width": 736,
+      "height": 920,
+      "pixel_sha256": "fb9a63bdd614fd27ec9f7e07accea665d331746ba3b0e9a9a87b7409b9543319",
+      "sha256": "8574a48713fe94b4eb1325794e9589ed6169798a2548126418a0b183c512efd0",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90ZC025",
+          "box": [
+            211,
+            576,
+            344,
+            609
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_22.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90ZC025",
+      "split": "test"
+    },
+    {
+      "id": "car_23",
+      "source": "pictures/911.jpg",
+      "width": 720,
+      "height": 900,
+      "pixel_sha256": "331e39b9e5be566d4f9548fa8f7a7d5a1a473462fe86d25a517759eaa09f6418",
+      "sha256": "5bebfce2127905a2be01be4e8d30d8886d6ebb7fb228372b65b96d0a0bb1993d",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -115,42 +611,292 @@
             641,
             615
           ],
-          "text": "99FT099"
-        }
-      ],
-      "width": 720,
-      "height": 900,
-      "sha256": "5bebfce2127905a2be01be4e8d30d8886d6ebb7fb228372b65b96d0a0bb1993d"
-    },
-    {
-      "id": "car_6",
-      "image": "data/images/car_6.png",
-      "source_filename": "pictures/Azelow.jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
-      "plates": [
+          "text": "99FT099",
+          "primary": true
+        },
         {
           "box": [
-            131,
-            615,
-            261,
-            655
+            159,
+            142,
+            198,
+            153
           ],
-          "text": "99PZ697"
+          "text": null,
+          "primary": false
+        },
+        {
+          "box": [
+            488,
+            220,
+            525,
+            235
+          ],
+          "text": null,
+          "primary": false
         }
       ],
-      "width": 735,
-      "height": 965,
-      "sha256": "08339c4b25a2fb305501a71bb19bdf968074f395e1aba7cdbd85bb81dbdf68c2"
+      "image": "data/images/car_23.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99FT099",
+      "split": "development"
     },
     {
-      "id": "car_7",
-      "image": "data/images/car_7.png",
-      "source_filename": "pictures/Bmw Grey.jpg",
+      "id": "car_24",
+      "source": "pictures/99 EA 059.jpg",
+      "width": 736,
+      "height": 865,
+      "pixel_sha256": "c32a6203cf600a0c65890cfb39c91a340934e685afdabff988253b9d9f582706",
+      "sha256": "cf09756bd875218dc15ad51bf51f9f67e543881b0f98da53745981f69cf0fef4",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99EA059",
+          "box": [
+            122,
+            509,
+            249,
+            544
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_24.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "99EA059",
+      "split": "development"
+    },
+    {
+      "id": "car_25",
+      "source": "pictures/99 FR 770.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "8f754589b3da26b2f7c0fcdd0c690f575742b92b7479f053a63b646a00eaff62",
+      "sha256": "ac4736c8948e20033c2ba603e6b4456ff167dd5d953ecbbeec1649cd6edca328",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99FR770",
+          "box": [
+            371,
+            799,
+            562,
+            852
+          ],
+          "primary": true
+        },
+        {
+          "box": [
+            0,
+            442,
+            33,
+            462
+          ],
+          "text": null,
+          "primary": false
+        },
+        {
+          "box": [
+            669,
+            559,
+            736,
+            583
+          ],
+          "text": null,
+          "primary": false
+        }
+      ],
+      "image": "data/images/car_25.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99FR770",
+      "split": "test"
+    },
+    {
+      "id": "car_26",
+      "source": "pictures/99 PD 102.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "a95b3468943f01111580aa14ed6148e3f59322e4d256a75449a970354b0cff6a",
+      "sha256": "a4eb54cbebb69838bbe8edadd7cae3d63aaa1cfec3f72fd33b999880b0afd295",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99PD102",
+          "box": [
+            152,
+            744,
+            319,
+            789
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_26.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99PD102",
+      "split": "development"
+    },
+    {
+      "id": "car_27",
+      "source": "pictures/99 RT 100.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "a0ab4360699496ebbf4402da2a98b5163a6b7e32c52e40f8ffe6ef619d45bad7",
+      "sha256": "2577566c26f66b8a1d79e87efc818cdd9fb782ef826902b6f386d0f41c9afe40",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99RT100",
+          "box": [
+            130,
+            768,
+            233,
+            810
+          ],
+          "primary": true
+        },
+        {
+          "box": [
+            673,
+            750,
+            722,
+            770
+          ],
+          "text": null,
+          "primary": false
+        }
+      ],
+      "image": "data/images/car_27.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99RT100",
+      "split": "test"
+    },
+    {
+      "id": "car_28",
+      "source": "pictures/99 ZZ 099.jpg",
+      "width": 736,
+      "height": 736,
+      "pixel_sha256": "7b5c197ae0577fba84f48b590f900dd52a9a93127f600c6883079c56c37c37ed",
+      "sha256": "07c4a9c922ddf7360c1f80f6a4f861e0ac2038c2b81e37919997b294cb50c600",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99ZZ099",
+          "box": [
+            252,
+            401,
+            494,
+            454
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_28.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99ZZ099",
+      "split": "development"
+    },
+    {
+      "id": "car_29",
+      "source": "pictures/Azelow - Fikoizim.jpg",
+      "width": 720,
+      "height": 1280,
+      "pixel_sha256": "c34eae66393c7aa3a381b0ec8696cf52e3d6eef280971b4f140706b715fdaca9",
+      "sha256": "2dca000f2ce91ebc858e8665eb36b395d9e4f6e5c44103865f0dae8b382927d2",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99TB405",
+          "box": [
+            154,
+            643,
+            296,
+            678
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_29.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99TB405",
+      "split": "development"
+    },
+    {
+      "id": "car_30",
+      "source": "pictures/Azelow.jpg",
+      "width": 720,
+      "height": 1280,
+      "pixel_sha256": "a3bb97469da5c6b1c6344948df9363f51fc4c79e3f0c0ae2b1065922e36d3d46",
+      "sha256": "108b9d5c3ec9f4ae892201087f15c1f43ef4dbc08b8cc4848b3912d3b7068e93",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99TB405",
+          "box": [
+            263,
+            696,
+            366,
+            723
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_30.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99TB405",
+      "split": "development"
+    },
+    {
+      "id": "car_31",
+      "source": "pictures/Bakinski Peredok \u269c\ufe0f.jpg",
+      "width": 735,
+      "height": 1155,
+      "pixel_sha256": "ec774438d175b5d73ef428d3577c6ffad30d57d7becb16aba69eb1886142d421",
+      "sha256": "8e604aa8ca94451be6aaf34c088c21b8564eba7340fc1bc30b7e81d14dd408cb",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "42CL107",
+          "box": [
+            308,
+            734,
+            480,
+            770
+          ],
+          "primary": true
+        },
+        {
+          "box": [
+            674,
+            665,
+            735,
+            685
+          ],
+          "text": null,
+          "primary": false
+        }
+      ],
+      "image": "data/images/car_31.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "42CL107",
+      "split": "test"
+    },
+    {
+      "id": "car_32",
+      "source": "pictures/Bmw Grey.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "5faa85e2a4ec7f60eb10d66b73fc337e658459c83031022a3d2595c8988e79c1",
+      "sha256": "f4241ab5821b12fa7e9e9e9066935001bd412275578c12a179707f4a54fca99f",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -159,20 +905,24 @@
             622,
             746
           ],
-          "text": "77KV767"
+          "text": "77KV767",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 981,
-      "sha256": "f4241ab5821b12fa7e9e9e9066935001bd412275578c12a179707f4a54fca99f"
+      "image": "data/images/car_32.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77KV767",
+      "split": "development"
     },
     {
-      "id": "car_8",
-      "image": "data/images/car_8.png",
-      "source_filename": "pictures/Bmw m5 f10 Baku.jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "id": "car_33",
+      "source": "pictures/Bmw m5 f10 Baku.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "952647c9ee21b113ee765a717c6c0f91ab3666983fe6bfc281b456262c88a65e",
+      "sha256": "1d95a904987466e0b0c7691bdda7bba04e89ea5fc57dd19fd70769b3390948ed",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -181,20 +931,24 @@
             439,
             717
           ],
-          "text": "10TO012"
+          "text": "10TO012",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 981,
-      "sha256": "1d95a904987466e0b0c7691bdda7bba04e89ea5fc57dd19fd70769b3390948ed"
+      "image": "data/images/car_33.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10TO012",
+      "split": "development"
     },
     {
-      "id": "car_9",
-      "image": "data/images/car_9.png",
-      "source_filename": "pictures/Changan Uni-V, Baku, Qaraba\u011f Atlar\u0131.jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "id": "car_34",
+      "source": "pictures/Changan Uni-V, Baku, Qaraba\u011f Atlar\u0131.jpg",
+      "width": 736,
+      "height": 679,
+      "pixel_sha256": "600100ffc843086664212199adff5aef22c9de2e277c79c901b2a0fe838e6ca5",
+      "sha256": "fd68dc17afb32fc9d589c702f1c40ccb40942a3a1892771deb521c055efc3746",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -203,130 +957,356 @@
             190,
             508
           ],
-          "text": "77XU117"
+          "text": "77XU117",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 679,
-      "sha256": "fd68dc17afb32fc9d589c702f1c40ccb40942a3a1892771deb521c055efc3746"
+      "image": "data/images/car_34.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77XU117",
+      "split": "development"
     },
     {
-      "id": "car_10",
-      "image": "data/images/car_10.png",
-      "source_filename": "pictures/download (1).jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
-      "plates": [
-        {
-          "box": [
-            341,
-            578,
-            471,
-            611
-          ],
-          "text": "55SS555"
-        }
-      ],
-      "width": 736,
-      "height": 828,
-      "sha256": "87629d8c0eb8c603f3d32e8a0720aa6ac8259db1d28321cf064c83f1803e2b68"
-    },
-    {
-      "id": "car_11",
-      "image": "data/images/car_11.png",
-      "source_filename": "pictures/download (2).jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
-      "plates": [
-        {
-          "box": [
-            369,
-            424,
-            518,
-            471
-          ],
-          "text": "10RC110"
-        }
-      ],
-      "width": 736,
-      "height": 736,
-      "sha256": "df98f4bd839676bda998b5a13edec89354513675517ea8596f058729ac6949ef"
-    },
-    {
-      "id": "car_12",
-      "image": "data/images/car_12.png",
-      "source_filename": "pictures/download (3).jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
-      "plates": [
-        {
-          "box": [
-            127,
-            783,
-            265,
-            824
-          ],
-          "text": "09BU966"
-        }
-      ],
+      "id": "car_35",
+      "source": "pictures/download (1).jpg",
       "width": 736,
       "height": 981,
-      "sha256": "37c533736f84c7e177566d525324a13ed281b103882798afe9df89bf18dc2759"
-    },
-    {
-      "id": "car_13",
-      "image": "data/images/car_13.png",
-      "source_filename": "pictures/download (4).jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "pixel_sha256": "e8fe9f4e93b3978e2e2b6442288441586186b13d28047b345d84b6e33adfc20e",
+      "sha256": "85c3e5dd889e82b5af596b1f1ef3cff5ee8ed6ba9d4f120d1b3af1c4d8ac95fb",
+      "previously_seen": false,
       "plates": [
         {
+          "text": "99FV543",
           "box": [
-            452,
-            552,
-            573,
-            590
+            272,
+            690,
+            488,
+            742
           ],
-          "text": "99OK555"
+          "primary": true
+        },
+        {
+          "box": [
+            37,
+            383,
+            71,
+            398
+          ],
+          "text": null,
+          "primary": false
         }
       ],
-      "width": 736,
-      "height": 880,
-      "sha256": "854a33a220857228f430fa7e654cfbf4b547741a427c8101b0c3492af3b90a23"
+      "image": "data/images/car_35.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99FV543",
+      "split": "test"
     },
     {
-      "id": "car_14",
-      "image": "data/images/car_14.png",
-      "source_filename": "pictures/download.jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "id": "car_36",
+      "source": "pictures/download (10).jpg",
+      "width": 736,
+      "height": 968,
+      "pixel_sha256": "97e320c68e8e14670d1a95b9945167763c22c2550cc496db653f562f8f798804",
+      "sha256": "ae780194f9cb88809a916e80fd9702c89528b04aa72f47671611b3c8e485935b",
+      "previously_seen": false,
       "plates": [
         {
+          "text": "77ES425",
           "box": [
-            238,
-            433,
-            441,
+            306,
+            697,
+            468,
+            733
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_36.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77ES425",
+      "split": "test"
+    },
+    {
+      "id": "car_37",
+      "source": "pictures/download (11).jpg",
+      "width": 735,
+      "height": 1070,
+      "pixel_sha256": "9981eef7f7b5bb5d5efdac652ff37d04576bce66edf7a2b9996c7b9eff99e6f5",
+      "sha256": "2e0ee45c7b2b61c351dc3b6ffa084151e242550d368c9978b1f0d9b9a544faed",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "11LX111",
+          "box": [
+            247,
+            745,
+            492,
+            801
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_37.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "11LX111",
+      "split": "test"
+    },
+    {
+      "id": "car_38",
+      "source": "pictures/download (2).jpg",
+      "width": 736,
+      "height": 958,
+      "pixel_sha256": "6c894646a96ad5a36336a4ea9399f3ddd5e806308d80cd7d30fcc96e83cca3cf",
+      "sha256": "ad35298acd1a1f39bfec3fc23137aaa65ac9005ff06d2af886e08a60f6a6fbd6",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90XC832",
+          "box": [
+            515,
+            802,
+            631,
+            840
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_38.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90XC832",
+      "split": "test"
+    },
+    {
+      "id": "car_39",
+      "source": "pictures/download (3).jpg",
+      "width": 736,
+      "height": 977,
+      "pixel_sha256": "5a3fb8332233a456fdc4f4928f0f7d46959bad484503604d4aa4d6519ba2e914",
+      "sha256": "33e080588a12d29cd386657d0f08399de5b13f70f7edbb8aeb375b85efcda79a",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77ES425",
+          "box": [
+            369,
+            686,
+            536,
+            724
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_39.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77ES425",
+      "split": "test"
+    },
+    {
+      "id": "car_40",
+      "source": "pictures/download (4).jpg",
+      "width": 736,
+      "height": 1308,
+      "pixel_sha256": "72b45cfffe99ef3f29a77afdef8c01b831b2662a6228713751583f57aeb319bd",
+      "sha256": "1ef3ee4850f8756869e6e1844f17f0142e975d12fe52b88a48c98dc05b8c4ff7",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99MT073",
+          "box": [
+            439,
+            762,
+            620,
+            812
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_40.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99MT073",
+      "split": "test"
+    },
+    {
+      "id": "car_41",
+      "source": "pictures/download (5).jpg",
+      "width": 736,
+      "height": 552,
+      "pixel_sha256": "f78c52c95e69a09c17cc4b55a05b9f5653d3091364dc92cdeff1926271ed479c",
+      "sha256": "dfa8e9abe57c991a3065bb0569bd97805fbfe1c63d879a95f4da0ca26645b9a5",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "10ON010",
+          "box": [
+            248,
+            228,
+            431,
+            267
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_41.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10ON010",
+      "split": "test"
+    },
+    {
+      "id": "car_42",
+      "source": "pictures/download (6).jpg",
+      "width": 736,
+      "height": 928,
+      "pixel_sha256": "94f1d499a3365b8e86c6c460168879df437516e50ffe5308dc93bf3a0f41e08a",
+      "sha256": "c6a997d646511cb71d453e36ecf77199e768a466e97fa0de90d65545c84996d0",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "01AA001",
+          "box": [
+            195,
+            684,
+            298,
+            714
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_42.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "01AA001",
+      "split": "test"
+    },
+    {
+      "id": "car_43",
+      "source": "pictures/download (7).jpg",
+      "width": 706,
+      "height": 932,
+      "pixel_sha256": "ed405f0c77463d35b24407150000e99663d3df97f506c35bfff1b1be34ac8cc5",
+      "sha256": "08b879166ba139328a1acdb36914f86fb88630dce53b875e16bfd1704537be21",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99DU911",
+          "box": [
+            190,
+            651,
+            360,
+            700
+          ],
+          "primary": true
+        },
+        {
+          "box": [
+            481,
+            465,
+            531,
             478
           ],
-          "text": "11LL111"
+          "text": "10FY911",
+          "primary": false
         }
       ],
-      "width": 682,
-      "height": 682,
-      "sha256": "6d029d272e24ada16e89c6f4daca3a09da3fc83fbcd48c89778e8c072d260212"
+      "image": "data/images/car_43.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "99DU911",
+      "split": "test"
     },
     {
-      "id": "car_15",
-      "image": "data/images/car_15.png",
-      "source_filename": "pictures/Ferrari 812.jpg",
+      "id": "car_44",
+      "source": "pictures/download (8).jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "27ecb920d95bd9a97078841f2e657c02de30e54d9641d61b879a856c147694ad",
+      "sha256": "bdf1710c63997e291659779722d287d0ebb74c6c271562574d5262f87fc5e504",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99MH444",
+          "box": [
+            163,
+            676,
+            304,
+            722
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_44.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "99MH444",
+      "split": "development"
+    },
+    {
+      "id": "car_45",
+      "source": "pictures/download (9).jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "bc562b6af0e6d8633f05e78f843cf16505655c4cd4b3c3668db2ece9dfe234ae",
+      "sha256": "3435d26d038e00e74c8f8038800d9b81905def4045f1e626995fe379f60794a7",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "90HH377",
+          "box": [
+            264,
+            672,
+            472,
+            716
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_45.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "90HH377",
+      "split": "development"
+    },
+    {
+      "id": "car_46",
+      "source": "pictures/download.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "8d44b62ac7053e702b700ad2c893bb06d451e01e3095f43ce37f8dfcf51b71ef",
+      "sha256": "a1b7d4f919c3bc7119843f02ea98654d5b4d0be9391d5947d2a4cd9f5b5aaa3f",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "72BC038",
+          "box": [
+            385,
+            654,
+            503,
+            683
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_46.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "72BC038",
+      "split": "development"
+    },
+    {
+      "id": "car_47",
+      "source": "pictures/Ferrari 812.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "58fde47b18b0c3365aa3ccc1d372540973f55073e4f4d668bb7990869795a611",
+      "sha256": "bea8fc439865e8810f7bdb04c3844eef3702cb71923701de5ecf7ce843fdb6e9",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -335,20 +1315,180 @@
             445,
             725
           ],
-          "text": "77CC777"
+          "text": "77CC777",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 981,
-      "sha256": "bea8fc439865e8810f7bdb04c3844eef3702cb71923701de5ecf7ce843fdb6e9"
+      "image": "data/images/car_47.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77CC777",
+      "split": "development"
     },
     {
-      "id": "car_16",
-      "image": "data/images/car_16.png",
-      "source_filename": "pictures/\ud835\ude70\ud835\ude89\ud835\ude74\ud835\ude81\ud835\ude7b\ud835\ude7e\ud835\ude85\ud83c\udde6\ud83c\uddff.jpg",
+      "id": "car_48",
+      "source": "pictures/Hundai\ud83d\ude0d.jpg",
+      "width": 736,
+      "height": 552,
+      "pixel_sha256": "704d9a01ae2778eb83b8f9543e106fdf57e912672d29adc13392b5da092fae10",
+      "sha256": "a4b6b71d253e00c9f53822f303d3b1ecc329a4ed045f56905cf5b2c8ea867017",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99CF818",
+          "box": [
+            288,
+            389,
+            443,
+            421
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_48.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "99CF818",
+      "split": "development"
+    },
+    {
+      "id": "car_49",
+      "source": "pictures/Ideal Byd destroyer 05.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "a170061cb4f10c291d64420d68d520a293ac21ffa9064a65fb10a478ff382e9d",
+      "sha256": "6f5254660a8ed3921bea72bfc92849d569490b59e770daf0c11a621ecd76310b",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77SG387",
+          "box": [
+            70,
+            765,
+            183,
+            812
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_49.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77SG387",
+      "split": "test"
+    },
+    {
+      "id": "car_50",
+      "source": "pictures/Kia sorento \u2764\ufe0f.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "a412a3c88c2ecc89e9b88ed0ad52a90b5566df6b3d7088f87cf2f8269926692e",
+      "sha256": "ff6d82eabe599692326de90cdbc18209b02ead706bc38f6ae3f394729e1964b7",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "68BX034",
+          "box": [
+            478,
+            632,
+            597,
+            678
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_50.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "68BX034",
+      "split": "development"
+    },
+    {
+      "id": "car_51",
+      "source": "pictures/Kia Sorento.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "4a1c768eea1dcfeafb6ac337e65060deb4d0e5d6dba58822e2356a5014309ec8",
+      "sha256": "60290a628e3522885eb3216f8d0142e18c94c11ba77b9a2ecad90f19ee8cb047",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77SX585",
+          "box": [
+            363,
+            537,
+            536,
+            583
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_51.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77SX585",
+      "split": "test"
+    },
+    {
+      "id": "car_52",
+      "source": "pictures/Mercedes.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "76fce17446d2a782b21016965d8569957216af820f15720b209f5fecd83ef044",
+      "sha256": "a873037c03ace20edb9fd57e2bdab4d5e4754ff70c86747b0ff204b09df7a9b0",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77KG155",
+          "box": [
+            305,
+            764,
+            465,
+            807
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_52.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77KG155",
+      "split": "test"
+    },
+    {
+      "id": "car_53",
+      "source": "pictures/Old Style \ud83d\ude01.jpg",
+      "width": 736,
+      "height": 981,
+      "pixel_sha256": "3dc0caec71fc8623c0ae6d439189ec7b16c6caa37c08949e631f7cb6d1c350e5",
+      "sha256": "4d9103cde0c1f72b57bfe9cf3ad0d31f76e7d0e79257311b05599440907f8d4b",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "10UD527",
+          "box": [
+            482,
+            722,
+            602,
+            773
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_53.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10UD527",
+      "split": "test"
+    },
+    {
+      "id": "car_54",
+      "source": "pictures/\ud835\ude70\ud835\ude89\ud835\ude74\ud835\ude81\ud835\ude7b\ud835\ude7e\ud835\ude85\ud83c\udde6\ud83c\uddff.jpg",
+      "width": 640,
+      "height": 600,
+      "pixel_sha256": "10d1ba5f00f2d3a7d6a7c7138a3a13e562975b0c0d8cd0b5e3342b5d9a8871a0",
+      "sha256": "5e1fe26201f8eb0ca569b3f40017e6107d41251deef583fe50bf3e8aea2f4165",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -357,20 +1497,76 @@
             228,
             435
           ],
-          "text": "10ZY124"
+          "text": "10ZY124",
+          "primary": true
         }
       ],
-      "width": 640,
-      "height": 600,
-      "sha256": "5e1fe26201f8eb0ca569b3f40017e6107d41251deef583fe50bf3e8aea2f4165"
+      "image": "data/images/car_54.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10ZY124",
+      "split": "development"
     },
     {
-      "id": "car_17",
-      "image": "data/images/car_17.png",
-      "source_filename": "pictures/\ud83d\udda4.jpg",
+      "id": "car_55",
+      "source": "pictures/\ud83c\udde6\ud83c\uddff\ud83d\udc6e\ud83c\udffb_\u2642\ufe0f.jpg",
+      "width": 735,
+      "height": 588,
+      "pixel_sha256": "6c0fd2f3d571bff8600eb097bd998337274e6dd623479c319f918a117f69fb7d",
+      "sha256": "bd0019dd5567a63ec4679edbde6da8c57480d502d86a2ad2529ba3e4220ae868",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "99AA999",
+          "box": [
+            234,
+            340,
+            460,
+            390
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_55.png",
       "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "layout": "single_line",
+      "group": "99AA999",
+      "split": "development"
+    },
+    {
+      "id": "car_56",
+      "source": "pictures/\ud83d\udc99.jpg",
+      "width": 736,
+      "height": 815,
+      "pixel_sha256": "937854fdb6ea330ee14ca1e73495dd34b2696c101e79b021da68cf1ad36749ff",
+      "sha256": "8723962dd48d551640a15d7a92706872a836b93128c5a2aec2660c22db15a148",
+      "previously_seen": false,
+      "plates": [
+        {
+          "text": "77YH502",
+          "box": [
+            424,
+            574,
+            517,
+            599
+          ],
+          "primary": true
+        }
+      ],
+      "image": "data/images/car_56.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77YH502",
+      "split": "test"
+    },
+    {
+      "id": "car_57",
+      "source": "pictures/\ud83d\udda4.jpg",
+      "width": 736,
+      "height": 1054,
+      "pixel_sha256": "21658afa8859d4f98afa23711c3db4aa9ff6deba405afc37417630dbdd8ee3ee",
+      "sha256": "c87ab601ff178cbdaf77c4e78cf20aecf353912e40a5c9c8993caebb4bd4de35",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -379,20 +1575,24 @@
             344,
             617
           ],
-          "text": "77RZ144"
+          "text": "77RZ144",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 1054,
-      "sha256": "c87ab601ff178cbdaf77c4e78cf20aecf353912e40a5c9c8993caebb4bd4de35"
+      "image": "data/images/car_57.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "77RZ144",
+      "split": "development"
     },
     {
-      "id": "car_18",
-      "image": "data/images/car_18.png",
-      "source_filename": "pictures/\ud83e\udd0d.jpg",
-      "format": "az",
-      "split": "test",
-      "annotation_status": "visually_annotated",
+      "id": "car_58",
+      "source": "pictures/\ud83e\udd0d.jpg",
+      "width": 736,
+      "height": 1309,
+      "pixel_sha256": "b50787421b4d03be2129aa449fb9db0aecb7e84f2954acce8d0a3cc06185415d",
+      "sha256": "230d94c58efad01a765186e2a55ecd02e99229a82fcd465e777d6c4fd1ccead2",
+      "previously_seen": true,
       "plates": [
         {
           "box": [
@@ -401,215 +1601,15 @@
             619,
             1181
           ],
-          "text": "10ZZ008"
+          "text": "10ZZ008",
+          "primary": true
         }
       ],
-      "width": 736,
-      "height": 1309,
-      "sha256": "230d94c58efad01a765186e2a55ecd02e99229a82fcd465e777d6c4fd1ccead2"
-    },
-    {
-      "id": "car_19",
-      "image": "data/images/car_19.png",
-      "source_filename": "endtoend/br/JRK5336.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            369,
-            656,
-            567,
-            720
-          ],
-          "text": "JRK5336",
-          "source_box": [
-            369,
-            656,
-            567,
-            720
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "2aeec951b75e2d5dc78e122dbfc8bb42b71f1dabfe341e263bea4c709374ab1d"
-    },
-    {
-      "id": "car_20",
-      "image": "data/images/car_20.png",
-      "source_filename": "endtoend/br/PYB6477.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            843,
-            797,
-            1132,
-            890
-          ],
-          "text": "PYB6477",
-          "source_box": [
-            843,
-            797,
-            1132,
-            890
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "79ee346064c5f3537c374d06a7281f96d7769eaf64b5fa73af47c1fa30df97ea"
-    },
-    {
-      "id": "car_21",
-      "image": "data/images/car_21.png",
-      "source_filename": "endtoend/br/AYO9034.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            528,
-            412,
-            690,
-            464
-          ],
-          "text": "AYO9034",
-          "source_box": [
-            528,
-            412,
-            690,
-            464
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 720,
-      "sha256": "740c61997b59f6c181e5dd48fd02bbacd2e406959f1134ddabf0c4e9e90b03cc"
-    },
-    {
-      "id": "car_22",
-      "image": "data/images/car_22.png",
-      "source_filename": "endtoend/br/JRV1942.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            561,
-            621,
-            824,
-            706
-          ],
-          "text": "JRV1942",
-          "source_box": [
-            561,
-            621,
-            824,
-            706
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "fd034b240ec2a59cf913b1afa3a2b360b581cdc3a39b927081120700cab70a95"
-    },
-    {
-      "id": "car_23",
-      "image": "data/images/car_23.png",
-      "source_filename": "endtoend/br/PJH0957.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            483,
-            601,
-            715,
-            676
-          ],
-          "text": "PJH0957",
-          "source_box": [
-            483,
-            601,
-            715,
-            676
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "d03770ee6bd0f7d08469509bfe49a3578b90c89a4c52bf69c950a848510419de"
-    },
-    {
-      "id": "car_24",
-      "image": "data/images/car_24.png",
-      "source_filename": "endtoend/br/PJJ4955.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            397,
-            678,
-            709,
-            779
-          ],
-          "text": "PJJ4955",
-          "source_box": [
-            397,
-            678,
-            709,
-            779
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "2b3846747cee6eca256868371427ec25be5944199462294944ed74d4e8f89cff"
-    },
-    {
-      "id": "car_25",
-      "image": "data/images/car_25.png",
-      "source_filename": "endtoend/br/PJI7589.jpg",
-      "source_revision": "9790ed20d475be1e940a7e2a3f492a97c2ebed9b",
-      "format": "br",
-      "split": "test",
-      "annotation_status": "source_annotation",
-      "plates": [
-        {
-          "box": [
-            385,
-            688,
-            649,
-            773
-          ],
-          "text": "PJI7589",
-          "source_box": [
-            385,
-            688,
-            649,
-            773
-          ]
-        }
-      ],
-      "width": 1280,
-      "height": 1280,
-      "sha256": "9aaae884772aeea1afdfd2044010402efc6753ad54005f717f611b6c691fb227"
+      "image": "data/images/car_58.png",
+      "format": "az",
+      "layout": "single_line",
+      "group": "10ZZ008",
+      "split": "development"
     }
   ]
 }

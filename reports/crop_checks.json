@@ -1,0 +1,45 @@
+{
+  "multi_vehicle": [
+    {
+      "image": "car_5",
+      "vehicles": "multiple",
+      "model_detections": 2,
+      "crops_checked": 2,
+      "all_crops_clipped_and_padded": true
+    },
+    {
+      "image": "car_23",
+      "vehicles": "multiple",
+      "model_detections": 2,
+      "crops_checked": 2,
+      "all_crops_clipped_and_padded": true
+    },
+    {
+      "image": "car_25",
+      "vehicles": "multiple",
+      "model_detections": 3,
+      "crops_checked": 3,
+      "all_crops_clipped_and_padded": true
+    }
+  ],
+  "synthetic_two_line_ocr": [
+    {
+      "expected": "12AB345",
+      "actual": "12AB345",
+      "correct": true,
+      "raw": "12\nAB345"
+    },
+    {
+      "expected": "90XY678",
+      "actual": "90XY678",
+      "correct": true,
+      "raw": "90\nXY678"
+    },
+    {
+      "expected": "77RZ144",
+      "actual": "77RZ144",
+      "correct": true,
+      "raw": "77\nRZ144"
+    }
+  ]
+}

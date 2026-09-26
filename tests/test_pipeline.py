@@ -6,7 +6,7 @@ from plate_pipeline.metrics import edit_distance, match_boxes
 from plate_pipeline.text import clean_text, valid_plate
 from plate_pipeline.pipeline import PlatePipeline
 from plate_pipeline.parking import ParkingLog
-from plate_pipeline.ocr import OCR
+from plate_pipeline.ocr import OCR, ordered_text
 from evaluate import summarize
 
 def test_iou():
@@ -87,11 +87,47 @@ def test_log_deduplicates_and_filters_invalid(tmp_path):
     assert len(rows)==1 and rows[0][1]=='ABC1234' and '+00:00' in rows[0][0]
 
 def test_ocr_keeps_raw_dealer_text_but_reads_large_characters():
-    class Reader:
-        def readtext(self,*args,**kwargs):
-            return [([[0,0],[40,0],[40,8],[0,8]],'STATE',0.8),
-                    ([[0,10],[100,10],[100,40],[0,40]],'ABC1234',0.9)]
-    ocr=object.__new__(OCR); ocr.engine='easyocr'; ocr.reader=Reader()
-    raw,confidence,number=ocr.read(np.zeros((50,120),dtype=np.uint8))
+    parts=[([[0,0],[40,0],[40,8],[0,8]],'STATE',0.8),
+           ([[0,10],[100,10],[100,40],[0,40]],'ABC1234',0.9)]
+    raw,confidence,number=ordered_text(parts)
     assert 'STATE' in raw and 'ABC1234' in raw
     assert number=='ABC1234'
+
+
+def test_two_line_reading_order_and_country_marker():
+    def part(x,y,text):
+        return ([[x,y],[x+60,y],[x+60,y+20],[x,y+20]],text,.9)
+    raw,_,number=ordered_text([part(80,40,'345'),part(50,5,'12'),part(5,40,'AB'),
+                             ([[0,5],[10,5],[10,13],[0,13]],'AZ',.9)])
+    assert 'AZ' in raw
+    assert number=='12\nAB345'
+    assert clean_text(number)=='12AB345'
+
+
+def test_az_rules_do_not_invent_missing_characters():
+    assert clean_text('AZ\n10-AB-123')=='10AB123'
+    assert clean_text('77 RZ 1LL')=='77RZ144'
+    assert clean_text('99TB4051')=='99TB405'
+    assert clean_text('12AB34')=='12AB34'
+    assert not valid_plate(clean_text('12AB34'))
+    assert clean_text('12AB345\n67CD890')=='12AB34567CD890'
+
+
+def test_unreadable_background_is_detection_only():
+    gt={'image':'x.png','plates':[{'box':[0,0,10,10],'text':None}]}
+    metrics,rows=summarize([gt],[[prediction()]])
+    assert metrics['true_positives']==1
+    assert metrics['readable_ground_truth_plates']==0
+    assert rows[0]['status']=='detection_only'
+    assert rows[0]['correct'] is None
+
+
+def test_manifest_has_disjoint_identity_groups_and_24_test_images():
+    import json
+    from pathlib import Path
+    records=json.loads((Path(__file__).parents[1]/'data/manifest.json').read_text())['images']
+    test=[r for r in records if r['split']=='test']
+    development=[r for r in records if r['split']=='development']
+    assert len(test)==24 and len(records)==58
+    assert not {r['group'] for r in test}&{r['group'] for r in development}
+    assert not any(r['previously_seen'] for r in test)
