@@ -1,6 +1,5 @@
 """Run both OCR engines on identical model detections from the held-out split."""
 import argparse
-import csv
 import hashlib
 import json
 from pathlib import Path
@@ -8,10 +7,9 @@ import time
 import warnings
 import cv2
 from plate_pipeline import PlatePipeline
-from plate_pipeline.geometry import iou, padded_crop
+from plate_pipeline.geometry import padded_crop
 from plate_pipeline.metrics import edit_distance, match_boxes
 from plate_pipeline.ocr import OCR
-from plate_pipeline.pipeline import draw_predictions
 from plate_pipeline.text import normalize
 
 def summarize(records, predictions):
@@ -72,6 +70,64 @@ def summarize(records, predictions):
             'ocr_cer_on_matched_detections':ocr_errors/ocr_chars if ocr_chars else None,
             'all_plates_image_accuracy':image_correct/len(records) if records else 0},rows
 
+def write_report(out, records, predictions, metadata):
+    """One report with results, raw OCR and up to three illustrated failures."""
+    out=Path(out); out.mkdir(parents=True,exist_ok=True)
+    engine=next(iter(predictions))
+    _,rows=summarize(records,predictions[engine])
+    split=metadata['split']
+    label='held-out test' if split=='test' else split+' (not a held-out score)'
+    lines=['# Plate recognition report','',f'{len(records)} {label} images. Boxes come from YOLOv8; labels are used only to check results.',
+           '', '| OCR | Mean IoU | Precision | Recall | Exact match | CER | Whole-image accuracy |',
+           '|---|---:|---:|---:|---:|---:|---:|']
+    for name,m in metadata['metrics'].items():
+        lines.append(f'| {name} | {m["mean_iou_all_gt"]:.4f} | {m["precision_at_50"]:.1%} | {m["recall_at_50"]:.1%} | {m["exact_plates"]}/{m["readable_ground_truth_plates"]} ({m["end_to_end_exact_match"]:.1%}) | {m["end_to_end_cer"]:.4f} | {m["all_plates_image_accuracy"]:.1%} |')
+    m=metadata['metrics'][engine]
+    lines+=['',f'{engine}: the main plate is correct in **{m["primary_exact_plates"]}/{m["primary_plates"]}** images. The table above also counts background plates.',
+            '', 'IoU checks box overlap. Missed boxes add zero to mean IoU. A correct detection needs IoU >= 0.5. Exact match means the full text is correct. CER is character edits / expected characters; missed text counts as deleted characters.',
+            '', 'Unreadable/partial plates count for detection only. Plates below 25 x 8 pixels are outside the test scope. Extra detections lower precision and whole-image accuracy. Both OCR tools use the same model boxes.',
+            '', '## Results', '', f'{engine} output. Box order: left, top, right, bottom. Raw text is shown before cleaning.',
+            '', '| Image | Expected | Model box | Raw OCR | Clean text | Result |', '|---|---|---|---|---|---|']
+    def cell(value):
+        return str(value).replace('|','/').replace('\n',' / ').replace('\r','') or '-'
+    for row in rows:
+        box=', '.join(str(round(v)) for v in json.loads(row['detected_box'])) if row['detected_box'] else '-'
+        lines.append('| '+' | '.join(cell(v) for v in [Path(row['image']).name,row['ground_truth_text'],box,row['raw_text'],row['cleaned_text'],row['status']])+' |')
+    lines+=['', '## Failure examples', '', 'These crops use model boxes, not hand-drawn boxes. Causes below describe likely OCR problems.']
+    failures=[r for r in rows if r['status']=='ocr_error']
+    failures+=[r for r in rows if r['status'] in ('miss','false_positive')]
+    chosen=[failures[i] for i in sorted({0,len(failures)//2,len(failures)-1})] if failures else []
+    # Prefer three OCR errors when available so the hand-off can be inspected.
+    ocr_errors=[r for r in rows if r['status']=='ocr_error']
+    if len(ocr_errors)>=3:
+        chosen=[ocr_errors[i] for i in (0,len(ocr_errors)//2,len(ocr_errors)-1)]
+    for index,row in enumerate(chosen,1):
+        image=PlatePipeline.load_image(row['image'])
+        if row['crop_box']:
+            x1,y1,x2,y2=json.loads(row['crop_box']); image=image[y1:y2,x1:x2]
+        pictures=out/'images'; pictures.mkdir(exist_ok=True)
+        path=pictures/f'failure_{index}.png'
+        if not cv2.imwrite(str(path),image): raise RuntimeError(f'Cannot save {path}')
+        if row['status']=='miss': reason='The detector missed this plate. Small size, blur or occlusion can cause this.'
+        elif row['status']=='false_positive': reason='The detector marked a region that is not an annotated plate.'
+        elif len(row['cleaned_text'])!=len(row['ground_truth_text']): reason='The box covers the plate, but OCR drops or adds characters. Repeated narrow characters can merge. The format rule cannot restore missing text.'
+        elif 'Z' in row['raw_text'] and any(a=='4' and b=='2' for a,b in zip(row['ground_truth_text'],row['cleaned_text'])): reason='OCR reads an open 4 as Z; the digit rule changes Z to 2. The wrong digit still passes the format check.'
+        else: reason='The box covers the plate, but OCR confuses similar character shapes. A wrong digit can still pass the format check.'
+        lines+=['',f'### {Path(row["image"]).name}', '',f'![Model crop](images/{path.name})', '',
+                f'Expected `{row["ground_truth_text"]}`; read `{row["cleaned_text"] or "empty"}`. {reason}']
+    if not chosen: lines+=['','No failures in this run.']
+    if metadata['manifest_sha256']=='a33a76aab546218ccca0572057d9342cd9ef27343b100737c13a3d3e3cc3d378':
+        lines+=['','## Other checks (saved validation)',
+                '', '58 supplied photos: 34 development, 24 test. The same plate stays in one split. No weights were trained on these photos. Across both splits, 53/58 main plates were correct; this is not the held-out score.',
+                '', 'Multiple vehicles: car_5 (2 crops), car_23 (2), car_25 (3). All 7 model crops had 8% padding, stayed within image bounds and matched the source pixels. Some background text was unreadable.',
+                '', 'Two-line OCR: 12/AB345, 90/XY678 and 77/RZ144 all passed on synthetic crops. Real two-line vehicle photos were not available.',
+                '', 'Tesseract is optional. The saved comparison used version 5.4.0, extracted locally because its installer could not run. EasyOCR needs only pip installation.']
+    lines+=['', 'Settings: image size 960; confidence 0.25; crop padding 8%.',
+            '',f'Model SHA-256: `{metadata["weights_sha256"]}`',
+            '',f'Labels SHA-256: `{metadata["manifest_sha256"]}`']
+    (out/'report.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--weights',default='models/plate.pt')
@@ -102,49 +158,22 @@ def main():
     for engine in args.engines:
         if engine != args.engines[0]: pipe.ocr=tesseract if engine=='tesseract' else OCR(engine)
         predictions=[]; start=time.perf_counter()
-        cropdir=out/engine/'crops'
-        if engine==args.engines[0]: cropdir.mkdir(parents=True,exist_ok=True)
         for record,image,boxes in zip(records,images,detections):
             pipe.plate_format=record['format']
             preds=[pipe.recognize(image,d) for d in boxes]
             predictions.append(preds)
-            if engine==args.engines[0]:
-                cv2.imwrite(str(out/engine/(record['id']+'.jpg')),draw_predictions(image,preds))
             for k,pred in enumerate(preds):
                 crop,bounds=padded_crop(image,pred['box'],pipe.padding)
                 assert bounds==pred['crop_box'] and crop.size
-                if engine==args.engines[0]:
-                    cv2.imwrite(str(cropdir/(record['id']+f'_{k}.png')),crop)
             print(f'{engine:10} {record["id"]:8} '+(' | '.join(p['text'] or '(unreadable)' for p in preds) or 'No plate detected'),flush=True)
         metrics,rows=summarize(records,predictions)
         metrics['ocr_seconds']=time.perf_counter()-start
         all_metrics[engine]=metrics; all_predictions[engine]=predictions
-        with (out/(engine+'.csv')).open('w',newline='',encoding='utf-8') as f:
-            writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
-        (out/(engine+'_predictions.json')).write_text(json.dumps(predictions,indent=2),encoding='utf-8')
     metadata={'weights_sha256':hashlib.sha256(Path(args.weights).read_bytes()).hexdigest(),
               'manifest_sha256':hashlib.sha256(Path(args.manifest).read_bytes()).hexdigest(),
               'split':args.split,'confidence':pipe.confidence,'padding':pipe.padding,'iou_threshold':0.5,'image_size':pipe.image_size,
               'metrics':all_metrics}
-    (out/'metrics.json').write_text(json.dumps(metadata,indent=2))
-    label='held-out test' if args.split=='test' else args.split+' (includes development; not a held-out score)'
-    lines=['# Evaluation results','',f'{len(records)} {label} images. All prediction boxes come from YOLOv8.',
-           '', '| OCR | Mean IoU (all GT) | Precision@.5 | Recall@.5 | Exact match | CER | Image accuracy |',
-           '|---|---:|---:|---:|---:|---:|---:|']
-    for engine,m in all_metrics.items():
-        lines.append(f'| {engine} | {m["mean_iou_all_gt"]:.4f} | {m["precision_at_50"]:.2%} | {m["recall_at_50"]:.2%} | {m["end_to_end_exact_match"]:.2%} | {m["end_to_end_cer"]:.4f} | {m["all_plates_image_accuracy"]:.2%} |')
-    lines+=['','Mean IoU uses confidence-ordered, one-to-one positive-overlap matching. Unmatched ground-truth plates contribute zero. Detection precision/recall and end-to-end accuracy require IoU >= 0.5.',
-            '', 'CER is total Levenshtein distance divided by total ground-truth characters. Missed plates count as deleted strings. Extra detections count as false positives and fail image accuracy; they do not add characters to the per-ground-truth CER. OCR-only scores in metrics.json use matched model crops, never ground-truth crops.',
-            '', 'Unreadable or partial background strings are marked null in the manifest: they count in detection metrics, but not OCR denominators. Plates smaller than 25x8 pixels are outside the annotation scope; predictions below that size are excluded only during evaluation.',
-            '', 'Each engine receives identical detector boxes and padded source pixels. The CSV files retain raw OCR output, cleaned text and every false positive.']
-    for engine,m in all_metrics.items():
-        lines+=['',f'{engine}: primary vehicle plate correct in **{m["primary_exact_plates"]}/{m["primary_plates"]}** images. Background detections are included in the stricter table above.']
-    lines+=['','## Per-image results','', '| Image | GT | Detected box | OCR | Result |','|---|---|---|---|---|']
-    _,rows=summarize(records,all_predictions[args.engines[0]])
-    for row in rows:
-        box=', '.join(str(round(v)) for v in json.loads(row['detected_box'])) if row['detected_box'] else '-'
-        lines.append(f'| {Path(row["image"]).name} | {row["ground_truth_text"]} | {box} | {row["cleaned_text"] or "-"} | {row["status"]} |')
-    (out/'results.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+    write_report(out,records,all_predictions,metadata)
     for engine,m in all_metrics.items():
         print(f'\n{engine.upper()} RESULT\n  Mean IoU   : {m["mean_iou_all_gt"]:.4f}\n  Exact match: {m["exact_plates"]}/{m["readable_ground_truth_plates"]} ({m["end_to_end_exact_match"]:.1%})\n  CER        : {m["end_to_end_cer"]:.4f}')
     print(f'\nReports saved to: {out.resolve()}')
